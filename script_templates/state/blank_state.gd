@@ -1,10 +1,10 @@
 extends State
 
+func can_enter(_prev_state: State) -> bool:
+	return true
+
 func enter(_prev_state: State) -> void:
-	animation_player.play("")
+	animation_player.play()
 
-func exit() -> void:
-	pass
-
-func physics_process(_delta: float) -> State:
-	return null
+func update(delta: float) -> State:
+	return super(delta)

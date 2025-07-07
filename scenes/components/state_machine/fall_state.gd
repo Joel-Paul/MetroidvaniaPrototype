@@ -1,24 +1,17 @@
-class_name FallState
 extends State
 
-@export var rise_state: RiseState
-
-@export var max_speed: float = 150
+@export var speed: float = 150
 @export var acceleration: float = 20
-@export var deceleration: float = 5
+@export var deceleration: float = 15
+@export var gravity: float = 980
+
+func can_enter(_prev_state: State) -> bool:
+	return not character.is_on_floor() and character.velocity.y >= 0
 
 func enter(_prev_state: State) -> void:
 	animation_player.play("fall")
 
-func exit() -> void:
-	pass
-
-func physics_process(delta: float) -> State:
-	var input := Input.get_axis("left", "right")
-	var acc := deceleration if input == 0 else acceleration
-	character.velocity.x = move_toward(character.velocity.x, input * max_speed, acc)
-	
-	character.velocity += character.get_gravity() * delta
-	if character.velocity.y < 0:
-		return rise_state
-	return null
+func update(delta: float) -> State:
+	controller.process_movement(speed, acceleration, deceleration, delta)
+	controller.process_gravity(gravity, delta)
+	return super(delta)

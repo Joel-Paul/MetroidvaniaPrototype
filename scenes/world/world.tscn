@@ -7,7 +7,6 @@
 
 [node name="Player" parent="." instance=ExtResource("2_sl2e5")]
 position = Vector2(300, 300)
-jump = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -50)
