@@ -9,7 +9,7 @@ extends Node
 var curr_state: State
 
 func init() -> void:
-	for state: State in find_children("*", "State", false):
+	for state: State in find_children("*", "State"):
 		state.init(character, animation_player, controller)
 	change_state(init_state)
 

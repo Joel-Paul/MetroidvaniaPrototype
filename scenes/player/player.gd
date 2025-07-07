@@ -5,6 +5,7 @@ func _ready() -> void:
 	$StateMachine.init()
 
 func _physics_process(delta: float) -> void:
+	$AttackComponent.update(delta)
 	$StateMachine.update(delta)
 	move_and_slide()
 

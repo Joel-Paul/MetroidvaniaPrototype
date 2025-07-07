@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene load_steps=37 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://dk4xbd8as5jje" path="res://scenes/player/player.gd" id="1_gmlin"]
@@ -20,6 +20,9 @@
 [ext_resource type="Script" uid="uid://bmq11u40fatjk" path="res://scenes/components/state_machine/jump_state.gd" id="17_lgqa7"]
 [ext_resource type="Script" uid="uid://b5u86ftp18k26" path="res://scenes/components/state_machine/fall_state.gd" id="18_uf5tr"]
 [ext_resource type="Script" uid="uid://3v23jojrpnlo" path="res://scenes/components/state_machine/rise_state.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://pgc5v7m4y74o" path="res://scenes/components/state_machine/normal_attack_a_state.gd" id="21_3j4b4"]
+[ext_resource type="Script" uid="uid://ctljb4fvmbugx" path="res://scenes/components/state_machine/normal_attack_b_state.gd" id="22_yj68g"]
+[ext_resource type="Script" uid="uid://dwui6jp3l3hhe" path="res://scenes/components/state_machine/norma_attack_c_state.gd" id="23_ioxgp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -97,7 +100,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_0owmy"]
@@ -204,6 +207,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hurtbox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackComponent:animation_locked")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_qek5x"]
@@ -381,7 +408,7 @@ tracks/5/path = NodePath("AttackComponent:animation_locked")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -458,7 +485,7 @@ tracks/5/path = NodePath("AttackComponent:animation_locked")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -535,7 +562,7 @@ tracks/5/path = NodePath("AttackComponent:animation_locked")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -691,7 +718,7 @@ script = ExtResource("11_myrg7")
 character = NodePath("..")
 
 [node name="AttackComponent" parent="." instance=ExtResource("12_8ydkj")]
-animation_locked = true
+unique_name_in_owner = true
 
 [node name="Hurtbox" parent="." instance=ExtResource("11_kvlxm")]
 
@@ -709,14 +736,14 @@ init_state = NodePath("IdleState")
 
 [node name="IdleState" parent="StateMachine" node_paths=PackedStringArray("transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("14_ugbui")
-transition_states = [NodePath("../JumpState"), NodePath("../FallState"), NodePath("../RunState")]
+transition_states = [NodePath("../NormalAttacks/NormalAttackAState"), NodePath("../JumpState"), NodePath("../FallState"), NodePath("../RunState")]
 
 [node name="RunState" parent="StateMachine" node_paths=PackedStringArray("transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("15_fcs02")
 speed = 150.0
 acceleration = 20.0
 deceleration = 15.0
-transition_states = [NodePath("../JumpState"), NodePath("../FallState"), NodePath("../IdleState")]
+transition_states = [NodePath("../NormalAttacks/NormalAttackAState"), NodePath("../JumpState"), NodePath("../FallState"), NodePath("../IdleState")]
 
 [node name="JumpState" parent="StateMachine" node_paths=PackedStringArray("transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("17_lgqa7")
@@ -738,5 +765,28 @@ acceleration = 20.0
 deceleration = 15.0
 gravity = 980.0
 transition_states = [NodePath("../RunState"), NodePath("../RiseState"), NodePath("../IdleState")]
+
+[node name="NormalAttacks" type="Node" parent="StateMachine"]
+
+[node name="NormalAttackAState" parent="StateMachine/NormalAttacks" node_paths=PackedStringArray("attack_component", "transition_states") instance=ExtResource("13_ugbui")]
+script = ExtResource("21_3j4b4")
+attack_component = NodePath("../../../AttackComponent")
+lunge_speed = 100.0
+deceleration = 10.0
+transition_states = [NodePath("../NormalAttackBState"), NodePath("../../RunState"), NodePath("../../IdleState")]
+
+[node name="NormalAttackBState" parent="StateMachine/NormalAttacks" node_paths=PackedStringArray("attack_component", "transition_states") instance=ExtResource("13_ugbui")]
+script = ExtResource("22_yj68g")
+attack_component = NodePath("../../../AttackComponent")
+lunge_speed = 100.0
+deceleration = 10.0
+transition_states = [NodePath("../NormalAttackCState"), NodePath("../../RunState"), NodePath("../../IdleState")]
+
+[node name="NormalAttackCState" parent="StateMachine/NormalAttacks" node_paths=PackedStringArray("attack_component", "transition_states") instance=ExtResource("13_ugbui")]
+script = ExtResource("23_ioxgp")
+attack_component = NodePath("../../../AttackComponent")
+lunge_speed = 100.0
+deceleration = 10.0
+transition_states = [NodePath("../NormalAttackAState"), NodePath("../../RunState"), NodePath("../../IdleState")]
 
 [connection signal="flip" from="Controller" to="." method="_on_controller_flip"]

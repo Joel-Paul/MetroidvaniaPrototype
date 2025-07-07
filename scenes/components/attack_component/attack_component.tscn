@@ -4,3 +4,8 @@
 
 [node name="AttackComponent" type="Node"]
 script = ExtResource("1_fkbe6")
+
+[node name="InputBuffer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+one_shot = true

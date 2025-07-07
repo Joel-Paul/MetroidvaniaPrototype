@@ -1,3 +1,4 @@
+class_name IdleState
 extends State
 
 func can_enter(_prev_state: State) -> bool:
