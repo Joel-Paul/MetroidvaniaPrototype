@@ -17,3 +17,4 @@ func flip(input: float):
 	var scale_x := signf(input)
 	%CollisionShape2D.scale.x = scale_x
 	%Sprite2D.scale.x = scale_x
+	%Hurtbox.scale.x = scale_x

@@ -8,9 +8,6 @@ extends State
 func can_enter(_prev_state: State) -> bool:
 	return not character.is_on_floor() and character.velocity.y >= 0
 
-func enter(_prev_state: State) -> void:
-	animation_player.play("fall")
-
 func update(delta: float) -> State:
 	controller.process_movement(speed, acceleration, deceleration, delta)
 	controller.process_gravity(gravity, delta)

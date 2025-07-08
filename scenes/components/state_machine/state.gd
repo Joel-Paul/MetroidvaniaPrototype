@@ -1,6 +1,7 @@
 class_name State
 extends Node
 
+@export var animation_name: StringName
 @export var transition_states: Array[State]
 
 var character: CharacterBody2D
@@ -17,12 +18,12 @@ func can_enter(_prev_state: State) -> bool:
 	return true
 
 func enter(_prev_state: State) -> void:
-	pass
+	animation_player.play(animation_name)
 
 func can_exit(_next_state: State) -> bool:
 	return true
 
-func exit(_next_state) -> void:
+func exit(_next_state: State) -> void:
 	pass
 
 func update(_delta: float) -> State:
