@@ -24,10 +24,10 @@ func process_gravity(gravity: float, delta) -> void:
 	character.velocity.y += gravity * delta
 
 func can_jump() -> bool:
-	return character.is_on_floor()
+	return character.is_on_floor() and Input.is_action_just_pressed("jump")
 
 func move_facing(speed: float) -> void:
-	character.velocity.x += speed * facing
+	character.velocity.x = speed * facing
 
 func process_flip() -> void:
 	var input := Input.get_axis("left", "right")
