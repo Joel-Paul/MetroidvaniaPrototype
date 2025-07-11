@@ -1,16 +1,20 @@
-[gd_scene load_steps=3 format=4 uid="uid://dy3b25flh2l8n"]
+[gd_scene load_steps=4 format=4 uid="uid://dy3b25flh2l8n"]
 
+[ext_resource type="Script" uid="uid://cb1p6ys7xd7oi" path="res://scenes/world/world.gd" id="1_1fp7r"]
 [ext_resource type="TileSet" uid="uid://dks3mjl8otate" path="res://tiles/ground.tres" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://bwfyxwd4ucwa6" path="res://scenes/player/player.tscn" id="2_sl2e5"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_1fp7r")
 
 [node name="Player" parent="." instance=ExtResource("2_sl2e5")]
 position = Vector2(300, 300)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, -1)
 offset = Vector2(0, -50)
 zoom = Vector2(1.5, 1.5)
+process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 

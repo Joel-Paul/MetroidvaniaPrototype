@@ -1,10 +1,10 @@
-class_name ComboStates
+class_name ComboState
 extends State
 
-@export var attack_component: AttackComponent
+@export var action: ActionBuffer
+@export var platformer_movement: PlatformerMovement
 @export var combo_animations: Array[StringName]
 @export var combo_delay_timer: float = 2
-@export var deceleration: float = 10
 
 var combo_delay: Timer = Timer.new()
 var animation_index = 0
@@ -18,11 +18,10 @@ func _ready() -> void:
 	combo_delay.timeout.connect(func(): animation_index = 0)
 
 func can_enter(_prev_state: State) -> bool:
-	return attack_component.attack_requested()
+	return action.is_active()
 
 func enter(_prev_state: State) -> void:
-	controller.process_flip()
-	attack_component.reset_buffer()
+	action.stop()
 	combo_delay.start(combo_delay_timer)
 	
 	animation_player.play(combo_animations[animation_index])
@@ -34,5 +33,5 @@ func can_exit(next_state: State) -> bool:
 	return super(next_state)
 
 func update(delta: float) -> State:
-	controller.process_movement(0, deceleration, deceleration, delta, false)
+	platformer_movement.update(delta)
 	return super(delta)

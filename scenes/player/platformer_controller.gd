@@ -4,11 +4,12 @@ extends Node
 signal flip(input: float)
 
 @export var character: CharacterBody2D
-var facing: int = 1
+
+var input: float
+var _facing: int = 1
 
 ## deceleration should always be less than acceleration
 func process_movement(speed: float, acceleration: float, deceleration: float, _delta: float, can_flip: bool = true) -> void:
-	var input := Input.get_axis("left", "right")
 	if can_flip: process_flip()
 	
 	# Player input should result in the fastest motion, so it should slow down
@@ -23,13 +24,9 @@ func process_movement(speed: float, acceleration: float, deceleration: float, _d
 func process_gravity(gravity: float, delta) -> void:
 	character.velocity.y += gravity * delta
 
-func can_jump() -> bool:
-	return character.is_on_floor() and Input.is_action_just_pressed("jump")
-
 func move_facing(speed: float) -> void:
-	character.velocity.x = speed * facing
+	character.velocity.x = speed * _facing
 
 func process_flip() -> void:
-	var input := Input.get_axis("left", "right")
-	if input != 0: facing = signi(int(input))
+	if input != 0: _facing = signi(int(input))
 	flip.emit(input)
