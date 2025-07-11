@@ -5,9 +5,11 @@ func _ready() -> void:
 	$StateMachine.init()
 
 func _physics_process(delta: float) -> void:
-	process_inputs()
+	if is_on_floor():
+		%CoyoteTimer.start()
 	$StateMachine.update(delta)
 	move_and_slide()
 
-func process_inputs() -> void:
-	pass
+func move_facing(vel: Vector2) -> void:
+	velocity.x = vel.x * %FlipComponent.direction
+	velocity.y = vel.y
