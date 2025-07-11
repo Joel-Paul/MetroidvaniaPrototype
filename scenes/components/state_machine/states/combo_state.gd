@@ -6,16 +6,12 @@ extends State
 @export var combo_animations: Array[StringName]
 @export var combo_delay_timer: float = 2
 
-var combo_delay: Timer = Timer.new()
+@onready var combo_delay: Timer = _create_timer()
+
 var animation_index = 0
 
 func _ready() -> void:
 	combo_animations.push_front(animation_name)
-	
-	add_child(combo_delay)
-	combo_delay.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	combo_delay.one_shot = true
-	combo_delay.timeout.connect(func(): animation_index = 0)
 
 func can_enter(_prev_state: State) -> bool:
 	return action.is_active()
@@ -35,3 +31,11 @@ func can_exit(next_state: State) -> bool:
 func update(delta: float) -> State:
 	platformer_movement.update(delta)
 	return super(delta)
+
+func _create_timer() -> Timer:
+	var timer = Timer.new()
+	add_child(timer)
+	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	timer.one_shot = true
+	timer.timeout.connect(func(): animation_index = 0)
+	return timer

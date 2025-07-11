@@ -6,13 +6,11 @@ extends Node
 
 var character: CharacterBody2D
 var animation_player: AnimationPlayer
-var controller: Controller
 
 @warning_ignore("shadowed_variable")
-func init(character: CharacterBody2D, animation_player: AnimationPlayer, controller: Controller) -> void:
+func init(character: CharacterBody2D, animation_player: AnimationPlayer) -> void:
 	self.character = character
 	self.animation_player = animation_player
-	self.controller = controller
 
 func can_enter(_prev_state: State) -> bool:
 	return true

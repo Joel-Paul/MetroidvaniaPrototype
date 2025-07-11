@@ -4,6 +4,7 @@ extends Node
 @export var character: CharacterBody2D
 @export var move_action: MoveAction
 
+@export_category("Variables")
 @export var max_speed: float = 0
 @export var acceleration: float = 0
 @export var deceleration: float = 0
