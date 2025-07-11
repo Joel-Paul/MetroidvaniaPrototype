@@ -184,7 +184,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [Vector2(100, 0)],
+"args": [Vector2(0, 0)],
 "method": &"move_facing"
 }]
 }
@@ -311,7 +311,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [Vector2(100, 0)],
+"args": [Vector2(0, 0)],
 "method": &"move_facing"
 }]
 }
@@ -438,7 +438,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [Vector2(100, 0)],
+"args": [Vector2(0, 0)],
 "method": &"move_facing"
 }]
 }
@@ -1510,9 +1510,9 @@ position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -32)
-texture = ExtResource("1_8afob")
-hframes = 2
+position = Vector2(0, -8)
+texture = ExtResource("13_6cv16")
+hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1561,21 +1561,22 @@ move_action = NodePath("../../Input/MoveInput")
 max_speed = 150.0
 acceleration = 20.0
 deceleration = 15.0
+gravity = 980.0
 
 [node name="AirMovement" parent="Movement" node_paths=PackedStringArray("character", "move_action") instance=ExtResource("19_uniwh")]
 character = NodePath("../..")
 move_action = NodePath("../../Input/MoveInput")
 max_speed = 150.0
-acceleration = 10.0
+acceleration = 15.0
 deceleration = 10.0
 gravity = 980.0
 
-[node name="AttackMovement" parent="Movement" node_paths=PackedStringArray("character", "move_action") instance=ExtResource("19_uniwh")]
+[node name="CombatMovement" parent="Movement" node_paths=PackedStringArray("character", "move_action") instance=ExtResource("19_uniwh")]
 character = NodePath("../..")
 move_action = NodePath("../../Input/MoveInput")
 acceleration = 10.0
 deceleration = 10.0
-gravity = 10.0
+gravity = 980.0
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("character", "animation_player", "init_state", "move_action", "flip_component") instance=ExtResource("12_gx1jg")]
 unique_name_in_owner = true
@@ -1600,13 +1601,14 @@ move_action = NodePath("../../../Input/MoveInput")
 animation_name = &"run"
 transition_states = [NodePath("../../CombatStates/NormalAttackCombo"), NodePath("../../CombatStates/HeavyAttackCombo"), NodePath("../JumpState"), NodePath("../../AirStates/FallState"), NodePath("../IdleState")]
 
-[node name="JumpState" parent="StateMachine/GroundStates" node_paths=PackedStringArray("jump_action", "coyote_timer", "transition_states") instance=ExtResource("13_ugbui")]
+[node name="JumpState" parent="StateMachine/GroundStates" node_paths=PackedStringArray("platformer_movement", "jump_action", "coyote_timer", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("17_lgqa7")
+platformer_movement = NodePath("../../../Movement/AirMovement")
 jump_action = NodePath("../../../Input/JumpInput")
-jump = 300.0
+jump = 325.0
 coyote_timer = NodePath("../../../CoyoteTimer")
-animation_name = &"jump"
-transition_states = [NodePath("../../AirStates/RiseState"), NodePath("../../AirStates/FallState"), NodePath("../IdleState")]
+animation_name = &"rise"
+transition_states = [NodePath("../../AirStates/FallState"), NodePath("../IdleState")]
 
 [node name="AirStates" type="Node" parent="StateMachine"]
 
@@ -1627,7 +1629,7 @@ transition_states = [NodePath("../../GroundStates/JumpState"), NodePath("../../C
 [node name="NormalAttackCombo" parent="StateMachine/CombatStates" node_paths=PackedStringArray("action", "platformer_movement", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("21_3j4b4")
 action = NodePath("../../../Input/AttackInput")
-platformer_movement = NodePath("../../../Movement/AttackMovement")
+platformer_movement = NodePath("../../../Movement/CombatMovement")
 combo_animations = Array[StringName]([&"normal_combo_b", &"normal_combo_c"])
 combo_delay_timer = 2.0
 animation_name = &"normal_combo_a"
@@ -1636,7 +1638,7 @@ transition_states = [NodePath("../../AirStates/FallState"), NodePath("."), NodeP
 [node name="HeavyAttackCombo" parent="StateMachine/CombatStates" node_paths=PackedStringArray("action", "platformer_movement", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("21_3j4b4")
 action = NodePath("../../../Input/HeavyAttackInput")
-platformer_movement = NodePath("../../../Movement/AirMovement")
+platformer_movement = NodePath("../../../Movement/CombatMovement")
 combo_animations = Array[StringName]([&"heavy_combo_b", &"heavy_combo_c"])
 combo_delay_timer = 2.0
 animation_name = &"heavy_combo_a"
@@ -1645,11 +1647,11 @@ transition_states = [NodePath("../../AirStates/FallState"), NodePath("."), NodeP
 [node name="AirAttackCombo" parent="StateMachine/CombatStates" node_paths=PackedStringArray("action", "platformer_movement", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("25_007i1")
 action = NodePath("../../../Input/AttackInput")
-platformer_movement = NodePath("../../../Movement/AttackMovement")
+platformer_movement = NodePath("../../../Movement/AirMovement")
 combo_animations = Array[StringName]([&"air_combo_b", &"air_combo_c"])
 combo_delay_timer = 2.0
 animation_name = &"air_combo_a"
-transition_states = [NodePath("."), NodePath("../../AirStates/RiseState"), NodePath("../../AirStates/FallState"), NodePath("../../GroundStates/RunState"), NodePath("../../GroundStates/IdleState")]
+transition_states = [NodePath("."), NodePath("../../AirStates/RiseState"), NodePath("../../AirStates/FallState"), NodePath("../NormalAttackCombo"), NodePath("../HeavyAttackCombo"), NodePath("../../GroundStates/RunState"), NodePath("../../GroundStates/IdleState")]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true

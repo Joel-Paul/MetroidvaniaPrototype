@@ -1,5 +1,4 @@
 extends ComboState
 
-func enter(prev_state: State) -> void:
-	character.velocity.y = 0
-	super(prev_state)
+func can_enter(_prev_state: State) -> bool:
+	return action.is_active() and not character.is_on_floor()
