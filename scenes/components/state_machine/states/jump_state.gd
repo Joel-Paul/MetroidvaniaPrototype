@@ -1,6 +1,6 @@
 extends State
 
-@export var platformer_movement: PlatformerMovement
+@export var movement: Movement
 @export var jump_action: InputBuffer
 @export var jump: float = 300
 @export var coyote_timer: Timer
@@ -17,5 +17,5 @@ func enter(prev_state: State) -> void:
 func update(delta: float) -> State:
 	if jump_action.is_released():
 		character.velocity.y *= 0.5
-	platformer_movement.update(delta)
+	movement.update(delta)
 	return super(delta)

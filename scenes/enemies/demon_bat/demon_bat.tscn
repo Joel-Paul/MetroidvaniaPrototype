@@ -1,0 +1,327 @@
+[gd_scene load_steps=22 format=3 uid="uid://181spnr3m2rf"]
+
+[ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
+[ext_resource type="Script" uid="uid://clbeg5u2yldcd" path="res://scenes/enemies/demon_bat/demon_bat.gd" id="1_gf7tn"]
+[ext_resource type="Texture2D" uid="uid://bujkf80bbj2pw" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-bite.png" id="2_5iah6"]
+[ext_resource type="Texture2D" uid="uid://dm60tbndqek8c" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-death.png" id="3_1f3xe"]
+[ext_resource type="Texture2D" uid="uid://gdh3kttso7vi" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-fire-projectile.png" id="4_gf7tn"]
+[ext_resource type="Texture2D" uid="uid://bvftdudqcdoto" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-knockback.png" id="5_ier4g"]
+[ext_resource type="PackedScene" uid="uid://dqocyul1tahli" path="res://scenes/components/flip_component/flip_component.tscn" id="7_00yde"]
+[ext_resource type="PackedScene" uid="uid://dh6bfxbddddmi" path="res://scenes/components/state_machine/state_machine.tscn" id="7_ier4g"]
+[ext_resource type="PackedScene" uid="uid://dlkdi4i0fep68" path="res://scenes/components/move_action/move_action.tscn" id="8_181f0"]
+[ext_resource type="PackedScene" uid="uid://snnphg8iq664" path="res://scenes/components/state_machine/state.tscn" id="8_ier4g"]
+[ext_resource type="PackedScene" uid="uid://df12b1321qav6" path="res://scenes/components/movement/floating_movement/floating_movement.tscn" id="9_i2djr"]
+[ext_resource type="Script" uid="uid://hjwsy77lk2a0" path="res://scenes/enemies/demon_bat/idle_state.gd" id="11_ofwsv"]
+[ext_resource type="Script" uid="uid://352j672rwn5s" path="res://scenes/components/state_machine/states/wander_state.gd" id="11_y8pqu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5iah6"]
+radius = 4.0
+height = 34.0
+
+[sub_resource type="Animation" id="Animation_bc8ra"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_f2bij")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_181f0"]
+resource_name = "bite"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_5iah6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_y8pqu"]
+resource_name = "death"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_1f3xe")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_nt67o"]
+resource_name = "fire_projectile"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_gf7tn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_ycy4p"]
+resource_name = "flying"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_f2bij")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_i2djr"]
+resource_name = "knockback"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_ier4g")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5iah6"]
+_data = {
+&"RESET": SubResource("Animation_bc8ra"),
+&"bite": SubResource("Animation_181f0"),
+&"death": SubResource("Animation_y8pqu"),
+&"fire_projectile": SubResource("Animation_nt67o"),
+&"flying": SubResource("Animation_ycy4p"),
+&"knockback": SubResource("Animation_i2djr")
+}
+
+[node name="DemonBat" type="CharacterBody2D"]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_gf7tn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5iah6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f2bij")
+offset = Vector2(0, -6.5)
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5iah6")
+}
+autoplay = "flying"
+
+[node name="FlipComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("7_00yde")]
+nodes_to_flip = [NodePath("../CollisionShape2D"), NodePath("../Sprite2D")]
+
+[node name="MoveAction" parent="." instance=ExtResource("8_181f0")]
+unique_name_in_owner = true
+
+[node name="WanderMovement" parent="." node_paths=PackedStringArray("character", "move_action") instance=ExtResource("9_i2djr")]
+max_speed = 100.0
+acceleration = 10.0
+deceleration = 10.0
+character = NodePath("..")
+move_action = NodePath("../MoveAction")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("character", "animation_player", "init_state", "move_action", "flip_component") instance=ExtResource("7_ier4g")]
+unique_name_in_owner = true
+character = NodePath("..")
+animation_player = NodePath("../AnimationPlayer")
+init_state = NodePath("IdleState")
+move_action = NodePath("../MoveAction")
+flip_component = NodePath("../FlipComponent")
+
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("transition_states")]
+script = ExtResource("11_ofwsv")
+animation_name = &"flying"
+transition_states = [NodePath("../WanderState")]
+metadata/_custom_type_script = "uid://dai8jwpq2uh3u"
+
+[node name="WanderState" parent="StateMachine" node_paths=PackedStringArray("movement", "move_action") instance=ExtResource("8_ier4g")]
+script = ExtResource("11_y8pqu")
+movement = NodePath("../../WanderMovement")
+move_action = NodePath("../../MoveAction")
+animation_name = &"flying"

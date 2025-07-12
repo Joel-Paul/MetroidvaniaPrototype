@@ -1,10 +1,14 @@
+class_name WanderState
 extends State
 
 @export var movement: Movement
 @export var move_action: MoveAction
 
-func can_enter(_prev_state: State) -> bool:
-	return character.is_on_floor() and (character.velocity.x != 0 or move_action.has_input())
+var target: Vector2
+
+func enter(prev_state: State) -> void:
+	move_action.input = Vector2(randf(), randf())
+	super(prev_state)
 
 func update(delta: float) -> State:
 	movement.update(delta)

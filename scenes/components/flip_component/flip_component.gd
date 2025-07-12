@@ -1,8 +1,17 @@
+@tool
 class_name FlipComponent
 extends Node
 
+@export var test_flip: bool:
+	set(value):
+		test_flip = value
+		var input = -1 if value else 1
+		flip(input)
 @export var nodes_to_flip: Array[Node2D]
 var direction: int = 1
+
+func _ready() -> void:
+	flip(1)
 
 func flip(input: float) -> void:
 	if not input: return

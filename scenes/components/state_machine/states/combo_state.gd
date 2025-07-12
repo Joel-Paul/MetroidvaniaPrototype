@@ -2,7 +2,7 @@ class_name ComboState
 extends State
 
 @export var action: ActionBuffer
-@export var platformer_movement: PlatformerMovement
+@export var movement: Movement
 @export var combo_animations: Array[StringName]
 @export var combo_delay_timer: float = 2
 
@@ -29,7 +29,7 @@ func can_exit(next_state: State) -> bool:
 	return super(next_state)
 
 func update(delta: float) -> State:
-	platformer_movement.update(delta)
+	movement.update(delta)
 	return super(delta)
 
 func _create_timer() -> Timer:

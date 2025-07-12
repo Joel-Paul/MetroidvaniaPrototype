@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://df12b1321qav6"]
+
+[ext_resource type="Script" uid="uid://t4cy2wf6wckb" path="res://scenes/components/movement/floating_movement/floating_movement.gd" id="1_pwl2y"]
+
+[node name="FloatingMovement" type="Node"]
+script = ExtResource("1_pwl2y")

@@ -22,7 +22,7 @@ func init() -> void:
 func update(delta: float) -> void:
 	var next_state = curr_state.update(delta)
 	if not lock_state:
-		flip_component.flip(move_action.move_input)
+		flip_component.flip(move_action.x)
 		if next_state: change_state(next_state)
 
 func change_state(next_state: State) -> void:
