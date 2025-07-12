@@ -28,3 +28,10 @@ func update(_delta: float) -> State:
 	for state in transition_states:
 		if can_exit(state) and state.can_enter(self): return state
 	return null
+
+func _create_timer() -> Timer:
+	var timer = Timer.new()
+	add_child(timer)
+	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	timer.one_shot = true
+	return timer

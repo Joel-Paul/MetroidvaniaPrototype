@@ -11,6 +11,7 @@ extends State
 var animation_index = 0
 
 func _ready() -> void:
+	combo_delay.timeout.connect(func(): animation_index = 0)
 	combo_animations.push_front(animation_name)
 
 func can_enter(_prev_state: State) -> bool:
@@ -31,11 +32,3 @@ func can_exit(next_state: State) -> bool:
 func update(delta: float) -> State:
 	movement.update(delta)
 	return super(delta)
-
-func _create_timer() -> Timer:
-	var timer = Timer.new()
-	add_child(timer)
-	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	timer.one_shot = true
-	timer.timeout.connect(func(): animation_index = 0)
-	return timer
