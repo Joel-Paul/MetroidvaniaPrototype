@@ -291,16 +291,18 @@ libraries = {
 }
 autoplay = "flying"
 
-[node name="IdleMovement" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
+[node name="Movements" type="Node" parent="."]
+
+[node name="IdleMovement" parent="Movements" node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
 acceleration = 1.0
 deceleration = 1.0
-entity = NodePath("..")
+entity = NodePath("../..")
 
-[node name="WanderMovement" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
+[node name="WanderMovement" parent="Movements" node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
 max_speed = 25.0
 acceleration = 10.0
 deceleration = 10.0
-entity = NodePath("..")
+entity = NodePath("../..")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "animation_player", "init_state") instance=ExtResource("7_ier4g")]
 unique_name_in_owner = true
@@ -310,7 +312,7 @@ init_state = NodePath("WaitState")
 
 [node name="WaitState" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "transition_states")]
 script = ExtResource("11_ofwsv")
-movement = NodePath("../../IdleMovement")
+movement = NodePath("../../Movements/IdleMovement")
 min_wait_time = 0.5
 max_wait_time = 5.0
 animation_name = &"flying"
@@ -319,8 +321,8 @@ metadata/_custom_type_script = "uid://dai8jwpq2uh3u"
 
 [node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "transition_states")]
 script = ExtResource("11_y8pqu")
-movement = NodePath("../../WanderMovement")
-max_wander_time = 2.0
+movement = NodePath("../../Movements/WanderMovement")
+max_wander_time = 5.0
 animation_name = &"flying"
 transition_states = [NodePath("../WaitState")]
 metadata/_custom_type_script = "uid://dai8jwpq2uh3u"
