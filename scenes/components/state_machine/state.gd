@@ -4,12 +4,12 @@ extends Node
 @export var animation_name: StringName
 @export var transition_states: Array[State]
 
-var character: CharacterBody2D
+var entity: Entity2D
 var animation_player: AnimationPlayer
 
 @warning_ignore("shadowed_variable")
-func init(character: CharacterBody2D, animation_player: AnimationPlayer) -> void:
-	self.character = character
+func init(entity: Entity2D, animation_player: AnimationPlayer) -> void:
+	self.entity = entity
 	self.animation_player = animation_player
 
 func can_enter(_prev_state: State) -> bool:

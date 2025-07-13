@@ -1,10 +1,9 @@
 extends State
 
 @export var movement: Movement
-@export var move_action: MoveAction
 
 func can_enter(_prev_state: State) -> bool:
-	return character.is_on_floor() and (character.velocity.x != 0 or move_action.has_input())
+	return entity.is_on_floor() and (entity.velocity.x != 0 or entity.has_input())
 
 func update(delta: float) -> State:
 	movement.update(delta)

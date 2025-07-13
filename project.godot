@@ -27,8 +27,8 @@ window/stretch/mode="viewport"
 
 folder_colors={
 "res://assets/": "red",
-"res://scenes/": "yellow",
-"res://script_templates/": "gray"
+"res://script_templates/": "gray",
+"res://src/": "blue"
 }
 
 [input]

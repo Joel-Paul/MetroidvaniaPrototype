@@ -15,7 +15,7 @@ func _ready() -> void:
 	combo_animations.push_front(animation_name)
 
 func can_enter(_prev_state: State) -> bool:
-	return action.is_active() and character.is_on_floor()
+	return action.is_active() and entity.is_on_floor()
 
 func enter(_prev_state: State) -> void:
 	action.stop()

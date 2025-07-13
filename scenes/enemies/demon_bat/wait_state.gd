@@ -7,7 +7,7 @@ extends State
 @onready var timer: Timer = _create_timer()
 
 func enter(_prev_state: State) -> void:
-	character.velocity = Vector2.ZERO
+	entity.velocity = Vector2.ZERO
 	timer.start(randf_range(min_wait_time, max_wait_time))
 
 func can_exit(next_state: State) -> bool:

@@ -1,8 +1,7 @@
 class_name Movement
 extends Node
 
-@export var character: CharacterBody2D
-@export var move_action: MoveAction
+@export var entity: Entity2D
 
 func update(_delta: float) -> void:
 	pass
