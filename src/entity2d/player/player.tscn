@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
-[ext_resource type="Script" uid="uid://dk4xbd8as5jje" path="res://src/entity/player/player.gd" id="1_gmlin"]
+[ext_resource type="Script" uid="uid://dk4xbd8as5jje" path="res://src/entity2d/player/player.gd" id="1_gmlin"]
 [ext_resource type="Texture2D" uid="uid://bucflposi1ihe" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-run.png" id="2_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dpbyw1elbr02o" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-prepare-jump.png" id="4_h17s1"]
 [ext_resource type="Texture2D" uid="uid://b8jvh1dk4awai" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-falling.png" id="4_p47bc"]
