@@ -1,7 +1,7 @@
-[gd_scene load_steps=50 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene load_steps=47 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
-[ext_resource type="Script" uid="uid://dk4xbd8as5jje" path="res://scenes/player/player.gd" id="1_gmlin"]
+[ext_resource type="Script" uid="uid://dk4xbd8as5jje" path="res://src/entity/player/player.gd" id="1_gmlin"]
 [ext_resource type="Texture2D" uid="uid://bucflposi1ihe" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-run.png" id="2_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dpbyw1elbr02o" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-prepare-jump.png" id="4_h17s1"]
 [ext_resource type="Texture2D" uid="uid://b8jvh1dk4awai" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-falling.png" id="4_p47bc"]
@@ -10,27 +10,24 @@
 [ext_resource type="Texture2D" uid="uid://dvlq4jsttip0q" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-normal-combo-b.png" id="9_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://ca0xcbju6mv6v" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-normal-combo-c.png" id="10_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://cnnv4dyxwrjxt" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-air-combo-a.png" id="11_cnsyf"]
-[ext_resource type="PackedScene" uid="uid://cf0nvf6cru64j" path="res://scenes/components/hurtbox.tscn" id="11_kvlxm"]
+[ext_resource type="PackedScene" uid="uid://cf0nvf6cru64j" path="res://src/components/hurtbox.tscn" id="11_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://ca0qyoe5qaq07" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-air-combo-b.png" id="12_007i1"]
-[ext_resource type="PackedScene" uid="uid://dh6bfxbddddmi" path="res://scenes/components/state_machine/state_machine.tscn" id="12_gx1jg"]
+[ext_resource type="PackedScene" uid="uid://dh6bfxbddddmi" path="res://src/components/state_machine/state_machine.tscn" id="12_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://r5pwixge6tvl" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-air-combo-c.png" id="13_6cv16"]
-[ext_resource type="PackedScene" uid="uid://snnphg8iq664" path="res://scenes/components/state_machine/state.tscn" id="13_ugbui"]
+[ext_resource type="PackedScene" uid="uid://snnphg8iq664" path="res://src/components/state_machine/state.tscn" id="13_ugbui"]
 [ext_resource type="Texture2D" uid="uid://byyvc5iw42l6c" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-heavy-combo-a.png" id="14_28m0y"]
-[ext_resource type="Script" uid="uid://b5v1isxqy1wsp" path="res://scenes/components/state_machine/states/idle_state.gd" id="14_ugbui"]
-[ext_resource type="Script" uid="uid://c0sc80scqc60a" path="res://scenes/components/state_machine/states/run_state.gd" id="15_fcs02"]
+[ext_resource type="Script" uid="uid://b5v1isxqy1wsp" path="res://src/components/state_machine/states/idle_state.gd" id="14_ugbui"]
+[ext_resource type="Script" uid="uid://c0sc80scqc60a" path="res://src/components/state_machine/states/run_state.gd" id="15_fcs02"]
 [ext_resource type="Texture2D" uid="uid://bonj7fpe34gq0" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-heavy-combo-b.png" id="15_uniwh"]
 [ext_resource type="Texture2D" uid="uid://dpl75kv36hgcl" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-heavy-combo-c.png" id="16_iqsei"]
-[ext_resource type="Script" uid="uid://bmq11u40fatjk" path="res://scenes/components/state_machine/states/jump_state.gd" id="17_lgqa7"]
-[ext_resource type="PackedScene" uid="uid://dqocyul1tahli" path="res://scenes/components/flip_component/flip_component.tscn" id="17_tffgl"]
-[ext_resource type="Script" uid="uid://rga4sfqw36ev" path="res://scenes/components/action_buffer/input_buffer.gd" id="18_28m0y"]
-[ext_resource type="Script" uid="uid://b5u86ftp18k26" path="res://scenes/components/state_machine/states/fall_state.gd" id="18_uf5tr"]
-[ext_resource type="PackedScene" uid="uid://c677jdqfrdlnf" path="res://scenes/components/action_buffer/action_buffer.tscn" id="19_28m0y"]
-[ext_resource type="PackedScene" uid="uid://dlkdi4i0fep68" path="res://scenes/components/move_action/move_action.tscn" id="19_iqsei"]
-[ext_resource type="PackedScene" uid="uid://i2c1qdtduosy" path="res://scenes/components/movement/grounded_movement/grounded_movement.tscn" id="19_uniwh"]
-[ext_resource type="Script" uid="uid://3v23jojrpnlo" path="res://scenes/components/state_machine/states/rise_state.gd" id="20_8ydkj"]
-[ext_resource type="Script" uid="uid://jfqbh26o3w8u" path="res://scenes/components/move_action/move_input.gd" id="20_tffgl"]
-[ext_resource type="Script" uid="uid://pgc5v7m4y74o" path="res://scenes/components/state_machine/states/combo_state.gd" id="21_3j4b4"]
-[ext_resource type="Script" uid="uid://deer0a8q8hi2q" path="res://scenes/components/state_machine/states/air_combo_state.gd" id="25_007i1"]
+[ext_resource type="Script" uid="uid://bmq11u40fatjk" path="res://src/components/state_machine/states/jump_state.gd" id="17_lgqa7"]
+[ext_resource type="Script" uid="uid://rga4sfqw36ev" path="res://src/components/action_buffer/input_buffer.gd" id="18_28m0y"]
+[ext_resource type="Script" uid="uid://b5u86ftp18k26" path="res://src/components/state_machine/states/fall_state.gd" id="18_uf5tr"]
+[ext_resource type="PackedScene" uid="uid://c677jdqfrdlnf" path="res://src/components/action_buffer/action_buffer.tscn" id="19_28m0y"]
+[ext_resource type="PackedScene" uid="uid://i2c1qdtduosy" path="res://src/components/movement/grounded_movement/grounded_movement.tscn" id="19_uniwh"]
+[ext_resource type="Script" uid="uid://3v23jojrpnlo" path="res://src/components/state_machine/states/rise_state.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://pgc5v7m4y74o" path="res://src/components/state_machine/states/combo_state.gd" id="21_3j4b4"]
+[ext_resource type="Script" uid="uid://deer0a8q8hi2q" path="res://src/components/state_machine/states/air_combo_state.gd" id="25_007i1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -1549,10 +1546,11 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 height = 24.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "flippable")]
 collision_layer = 0
 script = ExtResource("1_gmlin")
 state_machine = NodePath("StateMachine")
+flippable = [NodePath("Sprite2D"), NodePath("Hurtbox")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -1578,10 +1576,6 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_kvlxm")
 disabled = true
 
-[node name="FlipComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("17_tffgl")]
-unique_name_in_owner = true
-nodes_to_flip = [NodePath("../CollisionShape2D"), NodePath("../Sprite2D"), NodePath("../Hurtbox")]
-
 [node name="Input" type="Node" parent="."]
 
 [node name="AttackInput" parent="Input" instance=ExtResource("19_28m0y")]
@@ -1599,42 +1593,32 @@ wait_time = 0.1
 script = ExtResource("18_28m0y")
 action = &"jump"
 
-[node name="MoveInput" parent="Input" instance=ExtResource("19_iqsei")]
-script = ExtResource("20_tffgl")
-
 [node name="Movement" type="Node" parent="."]
 
-[node name="GroundMovement" parent="Movement" node_paths=PackedStringArray("character", "move_action") instance=ExtResource("19_uniwh")]
+[node name="GroundMovement" parent="Movement" node_paths=PackedStringArray("entity") instance=ExtResource("19_uniwh")]
 max_speed = 150.0
 acceleration = 20.0
 deceleration = 15.0
 gravity = 980.0
-character = NodePath("../..")
-move_action = NodePath("../../Input/MoveInput")
+entity = NodePath("../..")
 
-[node name="AirMovement" parent="Movement" node_paths=PackedStringArray("character", "move_action") instance=ExtResource("19_uniwh")]
+[node name="AirMovement" parent="Movement" node_paths=PackedStringArray("entity") instance=ExtResource("19_uniwh")]
 max_speed = 150.0
 acceleration = 15.0
 deceleration = 10.0
 gravity = 980.0
-character = NodePath("../..")
-move_action = NodePath("../../Input/MoveInput")
+entity = NodePath("../..")
 
-[node name="CombatMovement" parent="Movement" node_paths=PackedStringArray("character", "move_action") instance=ExtResource("19_uniwh")]
+[node name="CombatMovement" parent="Movement" node_paths=PackedStringArray("entity") instance=ExtResource("19_uniwh")]
 acceleration = 10.0
 deceleration = 10.0
 gravity = 980.0
-character = NodePath("../..")
-move_action = NodePath("../../Input/MoveInput")
+entity = NodePath("../..")
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "animation_player", "init_state", "move_action", "flip_component") instance=ExtResource("12_gx1jg")]
-unique_name_in_owner = true
+[node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "animation_player", "init_state") instance=ExtResource("12_gx1jg")]
 entity = NodePath("..")
 animation_player = NodePath("../AnimationPlayer")
 init_state = NodePath("GroundStates/IdleState")
-move_action = NodePath("../Input/MoveInput")
-flip_component = NodePath("../FlipComponent")
-lock_state = true
 
 [node name="GroundStates" type="Node" parent="StateMachine"]
 
@@ -1643,10 +1627,9 @@ script = ExtResource("14_ugbui")
 animation_name = &"idle"
 transition_states = [NodePath("../../CombatStates/NormalAttackCombo"), NodePath("../../CombatStates/HeavyAttackCombo"), NodePath("../JumpState"), NodePath("../../AirStates/FallState"), NodePath("../RunState")]
 
-[node name="RunState" parent="StateMachine/GroundStates" node_paths=PackedStringArray("movement", "move_action", "transition_states") instance=ExtResource("13_ugbui")]
+[node name="RunState" parent="StateMachine/GroundStates" node_paths=PackedStringArray("movement", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("15_fcs02")
 movement = NodePath("../../../Movement/GroundMovement")
-move_action = NodePath("../../../Input/MoveInput")
 animation_name = &"run"
 transition_states = [NodePath("../../CombatStates/NormalAttackCombo"), NodePath("../../CombatStates/HeavyAttackCombo"), NodePath("../JumpState"), NodePath("../../AirStates/FallState"), NodePath("../IdleState")]
 
@@ -1680,7 +1663,7 @@ script = ExtResource("21_3j4b4")
 action = NodePath("../../../Input/AttackInput")
 movement = NodePath("../../../Movement/CombatMovement")
 combo_animations = Array[StringName]([&"normal_combo_b", &"normal_combo_c"])
-combo_delay_timer = null
+combo_delay_timer = 2.0
 animation_name = &"normal_combo_a"
 transition_states = [NodePath("../../AirStates/FallState"), NodePath("."), NodePath("../HeavyAttackCombo"), NodePath("../../GroundStates/RunState"), NodePath("../../GroundStates/IdleState")]
 
@@ -1689,7 +1672,7 @@ script = ExtResource("21_3j4b4")
 action = NodePath("../../../Input/HeavyAttackInput")
 movement = NodePath("../../../Movement/CombatMovement")
 combo_animations = Array[StringName]([&"heavy_combo_b", &"heavy_combo_c"])
-combo_delay_timer = null
+combo_delay_timer = 2.0
 animation_name = &"heavy_combo_a"
 transition_states = [NodePath("../../AirStates/FallState"), NodePath("."), NodePath("../NormalAttackCombo"), NodePath("../../GroundStates/RunState"), NodePath("../../GroundStates/IdleState")]
 
@@ -1698,7 +1681,7 @@ script = ExtResource("25_007i1")
 action = NodePath("../../../Input/AttackInput")
 movement = NodePath("../../../Movement/CombatMovement")
 combo_animations = Array[StringName]([&"air_combo_b", &"air_combo_c"])
-combo_delay_timer = null
+combo_delay_timer = 2.0
 animation_name = &"air_combo_a"
 transition_states = [NodePath("."), NodePath("../../AirStates/RiseState"), NodePath("../../AirStates/FallState"), NodePath("../NormalAttackCombo"), NodePath("../HeavyAttackCombo"), NodePath("../../GroundStates/RunState"), NodePath("../../GroundStates/IdleState")]
 

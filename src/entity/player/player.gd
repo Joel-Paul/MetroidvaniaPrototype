@@ -2,7 +2,7 @@
 class_name Player
 extends Entity2D
 
-@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var coyote_timer: Timer = %CoyoteTimer
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return

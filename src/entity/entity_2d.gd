@@ -21,6 +21,7 @@ var _facing: int = 1
 
 #region virtual methods
 func _ready() -> void:
+	print(self.name)
 	if Engine.is_editor_hint(): return
 	state_machine.init()
 	flip(1)

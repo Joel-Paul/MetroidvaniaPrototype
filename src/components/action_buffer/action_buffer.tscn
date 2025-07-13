@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c677jdqfrdlnf"]
 
-[ext_resource type="Script" uid="uid://diuluk8g7fbim" path="res://scenes/components/action_buffer/action_buffer.gd" id="1_d2pfo"]
+[ext_resource type="Script" uid="uid://diuluk8g7fbim" path="res://src/components/action_buffer/action_buffer.gd" id="1_d2pfo"]
 
 [node name="ActionBuffer" type="Timer"]
 process_callback = 0

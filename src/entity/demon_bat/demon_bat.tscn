@@ -1,20 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene load_steps=19 format=3 uid="uid://181spnr3m2rf"]
 
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
-[ext_resource type="Script" uid="uid://clbeg5u2yldcd" path="res://scenes/enemies/demon_bat/demon_bat.gd" id="1_gf7tn"]
+[ext_resource type="Script" uid="uid://clbeg5u2yldcd" path="res://src/entity/demon_bat/demon_bat.gd" id="1_gf7tn"]
 [ext_resource type="Texture2D" uid="uid://bujkf80bbj2pw" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-bite.png" id="2_5iah6"]
 [ext_resource type="Texture2D" uid="uid://dm60tbndqek8c" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-death.png" id="3_1f3xe"]
 [ext_resource type="Texture2D" uid="uid://gdh3kttso7vi" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-fire-projectile.png" id="4_gf7tn"]
 [ext_resource type="Texture2D" uid="uid://bvftdudqcdoto" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-knockback.png" id="5_ier4g"]
-[ext_resource type="PackedScene" uid="uid://dqocyul1tahli" path="res://scenes/components/flip_component/flip_component.tscn" id="7_00yde"]
-[ext_resource type="PackedScene" uid="uid://dh6bfxbddddmi" path="res://scenes/components/state_machine/state_machine.tscn" id="7_ier4g"]
-[ext_resource type="PackedScene" uid="uid://df12b1321qav6" path="res://scenes/components/movement/floating_movement/floating_movement.tscn" id="9_i2djr"]
-[ext_resource type="Script" uid="uid://hjwsy77lk2a0" path="res://scenes/enemies/demon_bat/wait_state.gd" id="11_ofwsv"]
-[ext_resource type="Script" uid="uid://352j672rwn5s" path="res://scenes/components/state_machine/states/wander_state.gd" id="11_y8pqu"]
-[ext_resource type="Script" uid="uid://xy888b58ucrg" path="res://scenes/components/move_action/move_action.gd" id="12_nt67o"]
+[ext_resource type="PackedScene" uid="uid://dh6bfxbddddmi" path="res://src/components/state_machine/state_machine.tscn" id="7_ier4g"]
+[ext_resource type="PackedScene" uid="uid://df12b1321qav6" path="res://src/components/movement/floating_movement/floating_movement.tscn" id="9_i2djr"]
+[ext_resource type="Script" uid="uid://hjwsy77lk2a0" path="res://src/entity/demon_bat/wait_state.gd" id="11_ofwsv"]
+[ext_resource type="Script" uid="uid://352j672rwn5s" path="res://src/components/state_machine/states/wander_state.gd" id="11_y8pqu"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5iah6"]
-radius = 4.99999
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
+radius = 8.06226
 
 [sub_resource type="Animation" id="Animation_bc8ra"]
 length = 0.001
@@ -271,14 +269,16 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
-[node name="DemonBat" type="CharacterBody2D"]
+[node name="DemonBat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "flippable")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_gf7tn")
+state_machine = NodePath("StateMachine")
+flippable = [NodePath("Sprite2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_5iah6")
+shape = SubResource("CircleShape2D_1pbn3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_f2bij")
@@ -291,40 +291,36 @@ libraries = {
 }
 autoplay = "flying"
 
-[node name="FlipComponent" parent="." node_paths=PackedStringArray("nodes_to_flip") instance=ExtResource("7_00yde")]
-nodes_to_flip = [NodePath("../CollisionShape2D"), NodePath("../Sprite2D")]
+[node name="IdleMovement" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
+acceleration = 1.0
+deceleration = 1.0
+entity = NodePath("..")
 
-[node name="WanderMovement" parent="." node_paths=PackedStringArray("character", "move_action") instance=ExtResource("9_i2djr")]
+[node name="WanderMovement" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
 max_speed = 25.0
-acceleration = 50.0
-deceleration = 50.0
-character = NodePath("..")
-move_action = NodePath("../MoveAction")
+acceleration = 10.0
+deceleration = 10.0
+entity = NodePath("..")
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("character", "animation_player", "init_state", "move_action", "flip_component") instance=ExtResource("7_ier4g")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "animation_player", "init_state") instance=ExtResource("7_ier4g")]
 unique_name_in_owner = true
-character = NodePath("..")
+entity = NodePath("..")
 animation_player = NodePath("../AnimationPlayer")
 init_state = NodePath("WaitState")
-move_action = NodePath("../MoveAction")
-flip_component = NodePath("../FlipComponent")
 
-[node name="WaitState" type="Node" parent="StateMachine" node_paths=PackedStringArray("transition_states")]
+[node name="WaitState" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "transition_states")]
 script = ExtResource("11_ofwsv")
+movement = NodePath("../../IdleMovement")
 min_wait_time = 0.5
 max_wait_time = 5.0
 animation_name = &"flying"
 transition_states = [NodePath("../WanderState")]
 metadata/_custom_type_script = "uid://dai8jwpq2uh3u"
 
-[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "move_action", "transition_states")]
+[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "transition_states")]
 script = ExtResource("11_y8pqu")
 movement = NodePath("../../WanderMovement")
-move_action = NodePath("../../MoveAction")
 max_wander_time = 2.0
 animation_name = &"flying"
 transition_states = [NodePath("../WaitState")]
 metadata/_custom_type_script = "uid://dai8jwpq2uh3u"
-
-[node name="MoveAction" type="Node" parent="."]
-script = ExtResource("12_nt67o")

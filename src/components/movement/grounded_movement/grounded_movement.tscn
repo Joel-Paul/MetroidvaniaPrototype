@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://i2c1qdtduosy"]
+
+[ext_resource type="Script" uid="uid://xjg4nwxxao53" path="res://src/components/movement/grounded_movement/grounded_movement.gd" id="1_kupcu"]
+
+[node name="PlatformerMovement" type="Node"]
+script = ExtResource("1_kupcu")
