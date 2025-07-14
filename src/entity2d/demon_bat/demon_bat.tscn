@@ -269,11 +269,10 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
-[node name="DemonBat" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "flippable")]
+[node name="DemonBat" type="CharacterBody2D" node_paths=PackedStringArray("flippable")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_gf7tn")
-state_machine = NodePath("StateMachine")
 flippable = [NodePath("Sprite2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

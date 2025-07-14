@@ -3,11 +3,6 @@ class_name Entity2D
 extends CharacterBody2D
 
 #region @export variables
-@export var state_machine: StateMachine:
-	set(value):
-		state_machine = value
-		if Engine.is_editor_hint(): update_configuration_warnings()
-
 @export_group("Horizontal Flipping")
 @export var flippable: Array[Node2D]
 @export var _test_flip: bool = false:
@@ -18,6 +13,8 @@ extends CharacterBody2D
 
 var input: Vector2 = Vector2.ZERO
 var _facing: int = 1
+
+@onready var state_machine: StateMachine = $StateMachine
 
 #region virtual methods
 func _ready() -> void:

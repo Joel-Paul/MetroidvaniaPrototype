@@ -17,10 +17,11 @@ func _ready() -> void:
 	line = get_child(0)
 	entity = get_parent().find_child("Player")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	line.clear_points()
 	var from_id: Vector2i = get_global_mouse_position() / tile_set.tile_size.x
 	var to_id: Vector2i = entity.position / tile_set.tile_size.x
-	var path: PackedVector2Array = astar_grid.get_point_path(from_id, to_id)
-	line.clear_points()
-	for p in path:
-		line.add_point(p + tile_set.tile_size / 2.0)
+	if astar_grid.is_in_boundsv(from_id) and astar_grid.is_in_boundsv(to_id):
+		var path: PackedVector2Array = astar_grid.get_point_path(from_id, to_id, true)
+		for p in path:
+			line.add_point(p + tile_set.tile_size / 2.0)
