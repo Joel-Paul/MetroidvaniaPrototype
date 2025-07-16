@@ -29,9 +29,9 @@ func update(_delta: float) -> State:
 		if can_exit(state) and state.can_enter(self): return state
 	return null
 
-func _create_timer() -> Timer:
+func _create_timer(one_shot: bool = true) -> Timer:
 	var timer = Timer.new()
 	add_child(timer)
 	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	timer.one_shot = true
+	timer.one_shot = one_shot
 	return timer

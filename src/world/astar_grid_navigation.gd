@@ -1,27 +1,16 @@
+class_name TileMapNavigation
 extends TileMapLayer
 
-var astar_grid: AStarGrid2D
-var line: Line2D
-var entity: Entity2D
+@export_group("Navigation Tile", "nav_tile")
+@export var nav_tile_source_id: int = 0
+@export var nav_tile_atlas_coords: Vector2i
+@export var nav_tile_alternative_tile: int = 0
 
 func _ready() -> void:
-	astar_grid = AStarGrid2D.new()
-	astar_grid.region = get_used_rect()
-	astar_grid.cell_size = tile_set.tile_size
-	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
-	astar_grid.update()
-	
-	for coords: Vector2i in get_used_cells():
-		astar_grid.set_point_solid(coords)
-	
-	line = get_child(0)
-	entity = get_parent().find_child("Player")
-
-func _physics_process(_delta: float) -> void:
-	line.clear_points()
-	var from_id: Vector2i = get_global_mouse_position() / tile_set.tile_size.x
-	var to_id: Vector2i = entity.position / tile_set.tile_size.x
-	if astar_grid.is_in_boundsv(from_id) and astar_grid.is_in_boundsv(to_id):
-		var path: PackedVector2Array = astar_grid.get_point_path(from_id, to_id, true)
-		for p in path:
-			line.add_point(p + tile_set.tile_size / 2.0)
+	var rect: Rect2i = get_used_rect()
+	for i in range(rect.position.x, rect.end.x):
+		for j in range(rect.position.y, rect.end.y):
+			var coords: Vector2i = Vector2i(i, j)
+			if get_cell_atlas_coords(coords) == Vector2i(-1, -1):
+				set_cell(coords, nav_tile_source_id, nav_tile_atlas_coords, nav_tile_alternative_tile)
+	update_internals()
