@@ -277,6 +277,7 @@ script = ExtResource("1_gf7tn")
 flippable = [NodePath("Sprite2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1pbn3")
 
