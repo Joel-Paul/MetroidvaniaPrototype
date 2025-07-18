@@ -4,14 +4,13 @@ extends State
 @export var action: ActionBuffer
 @export var movement: Movement
 @export var combo_animations: Array[StringName]
-@export_range(0, 1, 0.1, "or_greater", "suffix:s") var combo_delay_timer: float = 0.5
 
-@onready var combo_delay: Timer = _create_timer()
+@export var combo_timer: Timer
 
 var animation_index = 0
 
 func _ready() -> void:
-	combo_delay.timeout.connect(func(): animation_index = 0)
+	combo_timer.timeout.connect(func(): animation_index = 0)
 	combo_animations.push_front(animation_name)
 
 func can_enter(_prev_state: State) -> bool:
@@ -19,14 +18,14 @@ func can_enter(_prev_state: State) -> bool:
 
 func enter(_prev_state: State) -> void:
 	action.stop()
-	combo_delay.paused = true
+	combo_timer.paused = true
 	
 	animation_player.play(combo_animations[animation_index])
-	animation_index = (animation_index + 1) % combo_animations.size()
 
 func exit(next_state: State) -> void:
-	combo_delay.start(combo_delay_timer)
-	combo_delay.paused = false
+	combo_timer.paused = false
+	combo_timer.start()
+	animation_index = (animation_index + 1) % combo_animations.size()
 	super(next_state)
 
 func can_exit(next_state: State) -> bool:
