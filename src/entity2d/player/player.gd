@@ -4,6 +4,9 @@ extends Entity2D
 
 @onready var coyote_timer: Timer = %CoyoteTimer
 
+func _ready() -> void:
+	super()
+
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	if is_on_floor():

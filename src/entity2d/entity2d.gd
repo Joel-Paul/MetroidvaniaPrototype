@@ -15,6 +15,7 @@ var input: Vector2 = Vector2.ZERO
 var _facing: int = 1
 
 @onready var state_machine: StateMachine = $StateMachine
+@onready var hitbox: Hitbox = $Hitbox
 
 #region virtual methods
 func _ready() -> void:
@@ -45,3 +46,6 @@ func flip(value: float = input.x) -> void:
 func move_facing(vel: Vector2) -> void:
 	velocity.x = vel.x * _facing
 	velocity.y = vel.y
+
+func set_attack(attack: Attack) -> void:
+	hitbox.attack = attack

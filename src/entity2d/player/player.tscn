@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene load_steps=59 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://dk4xbd8as5jje" path="res://src/entity2d/player/player.gd" id="1_gmlin"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://byyvc5iw42l6c" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-heavy-combo-a.png" id="14_28m0y"]
 [ext_resource type="Script" uid="uid://b5v1isxqy1wsp" path="res://src/components/state_machine/states/idle_state.gd" id="14_ugbui"]
 [ext_resource type="Script" uid="uid://c0sc80scqc60a" path="res://src/components/state_machine/states/run_state.gd" id="15_fcs02"]
+[ext_resource type="PackedScene" uid="uid://cu433q364ihrh" path="res://src/components/hurtbox/hurtbox.tscn" id="15_rb4vx"]
 [ext_resource type="Texture2D" uid="uid://bonj7fpe34gq0" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-heavy-combo-b.png" id="15_uniwh"]
 [ext_resource type="Texture2D" uid="uid://dpl75kv36hgcl" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-heavy-combo-c.png" id="16_iqsei"]
 [ext_resource type="Script" uid="uid://bmq11u40fatjk" path="res://src/components/state_machine/states/jump_state.gd" id="17_lgqa7"]
@@ -29,7 +30,9 @@
 [ext_resource type="Script" uid="uid://deer0a8q8hi2q" path="res://src/components/state_machine/states/air_combo_state.gd" id="25_007i1"]
 [ext_resource type="Script" uid="uid://bngvptr26l5pp" path="res://src/entity2d/player/combo_end_state.gd" id="27_2a0w1"]
 [ext_resource type="Script" uid="uid://bp3rcq1612koa" path="res://src/entity2d/player/heavy_combo_state.gd" id="27_y4nid"]
+[ext_resource type="Resource" uid="uid://dqt1yeniiddti" path="res://src/entity2d/player/attacks/normal_attack.tres" id="28_s3vi5"]
 [ext_resource type="Script" uid="uid://derd5q58ktr8c" path="res://src/entity2d/player/combo_mid_state.gd" id="29_sejvq"]
+[ext_resource type="Resource" uid="uid://bp45152j8xfmm" path="res://src/entity2d/player/attacks/heavy_attack.tres" id="30_7rgwx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -2371,6 +2374,10 @@ _data = {
 &"run": SubResource("Animation_7obkq")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3vi5"]
+radius = 4.0
+height = 18.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 radius = 9.99999
 
@@ -2393,7 +2400,14 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="Hurtbox" parent="." instance=ExtResource("15_rb4vx")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_s3vi5")
+
 [node name="Hitbox" parent="." instance=ExtResource("11_kvlxm")]
+unique_name_in_owner = true
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -2486,6 +2500,7 @@ transition_states = [NodePath("../../GroundStates/JumpState"), NodePath("../../C
 [node name="NormalAttackCombo" parent="StateMachine/CombatStates" node_paths=PackedStringArray("action", "movement", "combo_timer", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("21_3j4b4")
 action = NodePath("../../../Input/AttackInput")
+attack = ExtResource("28_s3vi5")
 movement = NodePath("../../../Movement/HaltMovement")
 combo_animations = Array[StringName]([&"normal_combo_b", &"normal_combo_c"])
 combo_timer = NodePath("ComboTimer")
@@ -2500,6 +2515,7 @@ one_shot = true
 [node name="HeavyAttackCombo" parent="StateMachine/CombatStates" node_paths=PackedStringArray("action", "movement", "combo_timer", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("27_y4nid")
 action = NodePath("../../../Input/HeavyAttackInput")
+attack = ExtResource("30_7rgwx")
 movement = NodePath("../../../Movement/HaltMovement")
 combo_animations = Array[StringName]([&"heavy_combo_b_start", &"heavy_combo_c_start"])
 combo_timer = NodePath("ComboTimer")
@@ -2545,6 +2561,7 @@ transition_states = [NodePath("../../../../AirStates/FallState"), NodePath("../.
 [node name="AirAttackCombo" parent="StateMachine/CombatStates" node_paths=PackedStringArray("action", "movement", "combo_timer", "transition_states") instance=ExtResource("13_ugbui")]
 script = ExtResource("25_007i1")
 action = NodePath("../../../Input/AttackInput")
+attack = ExtResource("28_s3vi5")
 movement = NodePath("../../../Movement/HaltMovement")
 combo_animations = Array[StringName]([&"air_combo_b", &"air_combo_c"])
 combo_timer = NodePath("ComboTimer")

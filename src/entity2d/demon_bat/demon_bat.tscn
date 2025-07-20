@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene load_steps=25 format=3 uid="uid://181spnr3m2rf"]
 
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
 [ext_resource type="Script" uid="uid://clbeg5u2yldcd" path="res://src/entity2d/demon_bat/demon_bat.gd" id="1_gf7tn"]
@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dm60tbndqek8c" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-death.png" id="3_1f3xe"]
 [ext_resource type="Texture2D" uid="uid://gdh3kttso7vi" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-fire-projectile.png" id="4_gf7tn"]
 [ext_resource type="Texture2D" uid="uid://bvftdudqcdoto" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-knockback.png" id="5_ier4g"]
+[ext_resource type="PackedScene" uid="uid://cu433q364ihrh" path="res://src/components/hurtbox/hurtbox.tscn" id="7_7cahv"]
 [ext_resource type="PackedScene" uid="uid://dh6bfxbddddmi" path="res://src/components/state_machine/state_machine.tscn" id="7_ier4g"]
+[ext_resource type="PackedScene" uid="uid://cf0nvf6cru64j" path="res://src/components/hitbox/hitbox.tscn" id="7_uhy6p"]
 [ext_resource type="PackedScene" uid="uid://df12b1321qav6" path="res://src/components/movement/floating_movement/floating_movement.tscn" id="9_i2djr"]
+[ext_resource type="PackedScene" uid="uid://dh3yf0vjq6y7a" path="res://src/components/health/health_component.tscn" id="9_v2idi"]
 [ext_resource type="Script" uid="uid://hjwsy77lk2a0" path="res://src/entity2d/demon_bat/wait_state.gd" id="11_ofwsv"]
 [ext_resource type="Script" uid="uid://cnon3qykay18p" path="res://src/entity2d/demon_bat/chase_state.gd" id="11_sa6p8"]
 [ext_resource type="Script" uid="uid://352j672rwn5s" path="res://src/components/state_machine/states/wander_state.gd" id="11_y8pqu"]
@@ -53,6 +56,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_181f0"]
 resource_name = "bite"
@@ -93,6 +108,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_y8pqu"]
@@ -270,6 +297,13 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2idi"]
+radius = 11.0454
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7cahv"]
+radius = 5.0
+height = 24.0
+
 [node name="DemonBat" type="CharacterBody2D" node_paths=PackedStringArray("flippable")]
 collision_layer = 0
 motion_mode = 1
@@ -277,7 +311,6 @@ script = ExtResource("1_gf7tn")
 flippable = [NodePath("Sprite2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1pbn3")
 
@@ -291,6 +324,22 @@ libraries = {
 &"": SubResource("AnimationLibrary_5iah6")
 }
 autoplay = "flying"
+
+[node name="Hurtbox" parent="." instance=ExtResource("7_7cahv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_v2idi")
+
+[node name="Hitbox" parent="." instance=ExtResource("7_uhy6p")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(6, 2)
+shape = SubResource("CapsuleShape2D_7cahv")
+disabled = true
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("9_v2idi")]
+max_health = 2
+hurtbox = NodePath("../Hurtbox")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
