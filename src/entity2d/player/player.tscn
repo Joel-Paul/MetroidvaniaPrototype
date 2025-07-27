@@ -1987,9 +1987,10 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_s3vi5")
 
-[node name="Hitbox" parent="." instance=ExtResource("11_kvlxm")]
+[node name="Hitbox" parent="." node_paths=PackedStringArray("character") instance=ExtResource("11_kvlxm")]
 unique_name_in_owner = true
 collision_mask = 4
+character = NodePath("..")
 attack = ExtResource("28_s3vi5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -1999,9 +2000,10 @@ shape = SubResource("CapsuleShape2D_kvlxm")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="HeavyHitbox" parent="." instance=ExtResource("11_kvlxm")]
+[node name="HeavyHitbox" parent="." node_paths=PackedStringArray("character") instance=ExtResource("11_kvlxm")]
 unique_name_in_owner = true
 collision_mask = 4
+character = NodePath("..")
 attack = ExtResource("30_7rgwx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeavyHitbox"]
@@ -2043,14 +2045,15 @@ deceleration = 700.0
 entity = NodePath("../..")
 
 [node name="HaltMovement" parent="Movement" node_paths=PackedStringArray("entity") instance=ExtResource("19_uniwh")]
-acceleration = 300.0
-deceleration = 300.0
+acceleration = 400.0
+deceleration = 400.0
 entity = NodePath("../..")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "animation_player", "init_state") instance=ExtResource("12_gx1jg")]
 entity = NodePath("..")
 animation_player = NodePath("../AnimationPlayer")
 init_state = NodePath("GroundStates/IdleState")
+lock_state = true
 
 [node name="GroundStates" type="Node" parent="StateMachine"]
 

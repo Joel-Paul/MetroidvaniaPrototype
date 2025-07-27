@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene load_steps=27 format=3 uid="uid://181spnr3m2rf"]
 
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
 [ext_resource type="Script" uid="uid://clbeg5u2yldcd" path="res://src/entity2d/demon_bat/demon_bat.gd" id="1_gf7tn"]
@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://cf0nvf6cru64j" path="res://src/components/hitbox/hitbox.tscn" id="7_uhy6p"]
 [ext_resource type="PackedScene" uid="uid://df12b1321qav6" path="res://src/components/movement/floating_movement/floating_movement.tscn" id="9_i2djr"]
 [ext_resource type="PackedScene" uid="uid://dh3yf0vjq6y7a" path="res://src/components/health/health_component.tscn" id="9_v2idi"]
+[ext_resource type="PackedScene" uid="uid://ceo5ohakjun24" path="res://src/components/knockback/knockback_component.tscn" id="10_hvwbj"]
 [ext_resource type="Script" uid="uid://hjwsy77lk2a0" path="res://src/entity2d/demon_bat/wait_state.gd" id="11_ofwsv"]
 [ext_resource type="Script" uid="uid://cnon3qykay18p" path="res://src/entity2d/demon_bat/chase_state.gd" id="11_sa6p8"]
 [ext_resource type="Script" uid="uid://352j672rwn5s" path="res://src/components/state_machine/states/wander_state.gd" id="11_y8pqu"]
+[ext_resource type="Script" uid="uid://b06hgrj2hkj3c" path="res://src/entity2d/demon_bat/hit_state.gd" id="15_4vig0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
 radius = 6.0
@@ -67,6 +69,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_181f0"]
@@ -248,7 +262,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_i2djr"]
 resource_name = "knockback"
-length = 0.1
+length = 0.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -285,6 +299,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5iah6"]
@@ -330,7 +356,8 @@ autoplay = "flying"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_v2idi")
 
-[node name="Hitbox" parent="." instance=ExtResource("7_uhy6p")]
+[node name="Hitbox" parent="." node_paths=PackedStringArray("character") instance=ExtResource("7_uhy6p")]
+character = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(6, 2)
@@ -338,7 +365,11 @@ shape = SubResource("CapsuleShape2D_7cahv")
 disabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("9_v2idi")]
-max_health = 2
+max_health = 257
+hurtbox = NodePath("../Hurtbox")
+
+[node name="KnockbackComponent" parent="." node_paths=PackedStringArray("character", "hurtbox") instance=ExtResource("10_hvwbj")]
+character = NodePath("..")
 hurtbox = NodePath("../Hurtbox")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -347,8 +378,8 @@ path_postprocessing = 1
 [node name="Movements" type="Node" parent="."]
 
 [node name="HaltMovement" parent="Movements" node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
-acceleration = 1.0
-deceleration = 1.0
+acceleration = 200.0
+deceleration = 200.0
 entity = NodePath("../..")
 
 [node name="WanderMovement" parent="Movements" node_paths=PackedStringArray("entity") instance=ExtResource("9_i2djr")]
@@ -390,3 +421,9 @@ script = ExtResource("11_sa6p8")
 movement = NodePath("../../Movements/ChaseMovement")
 navigation = NodePath("../../NavigationAgent2D")
 animation_name = &"flying"
+
+[node name="HitState" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "transition_states")]
+script = ExtResource("15_4vig0")
+movement = NodePath("../../Movements/HaltMovement")
+animation_name = &"knockback"
+transition_states = [NodePath("../ChaseState"), NodePath("../WaitState")]

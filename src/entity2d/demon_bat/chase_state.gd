@@ -11,9 +11,10 @@ func _ready() -> void:
 func can_enter(_prev_state: State) -> bool:
 	return true
 
-func enter(_prev_state: State) -> void:
+func enter(prev_state: State) -> void:
 	_target_player()
 	_nav_update.start(0.5)
+	super(prev_state)
 
 func exit(_new_state: State) -> void:
 	_nav_update.stop()

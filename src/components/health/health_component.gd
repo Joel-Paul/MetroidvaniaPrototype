@@ -14,4 +14,3 @@ func _ready() -> void:
 func _on_attacked(attack: Attack) -> void:
 	health -= attack.damage
 	health_changed.emit(health)
-	print("Health: {0}. Received {1} damage!".format([health, attack.damage]))
