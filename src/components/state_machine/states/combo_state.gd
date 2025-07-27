@@ -2,7 +2,6 @@ class_name ComboState
 extends State
 
 @export var action: ActionBuffer
-@export var attack: Attack
 @export var movement: Movement
 @export var combo_animations: Array[StringName]
 @export var combo_timer: Timer
@@ -17,7 +16,6 @@ func can_enter(_prev_state: State) -> bool:
 	return action.is_active() and entity.is_on_floor()
 
 func enter(_prev_state: State) -> void:
-	entity.set_attack(attack)
 	action.stop()
 	combo_timer.paused = true
 	
