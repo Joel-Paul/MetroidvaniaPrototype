@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://dqt1yeniiddti"]
-
-[ext_resource type="Script" uid="uid://ct50xcjdaylqx" path="res://src/components/hitbox/attack.gd" id="1_3xjd8"]
-
-[resource]
-script = ExtResource("1_3xjd8")
-damage = 1
-knockback = 100.0
-metadata/_custom_type_script = "uid://ct50xcjdaylqx"

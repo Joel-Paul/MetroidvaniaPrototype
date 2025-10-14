@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh6bfxbddddmi"]
-
-[ext_resource type="Script" uid="uid://djqnigtl5ylo0" path="res://src/components/state_machine/state_machine.gd" id="1_psvop"]
-
-[node name="StateMachine" type="Node"]
-script = ExtResource("1_psvop")

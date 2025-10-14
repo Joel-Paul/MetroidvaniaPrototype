@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cb1p6ys7xd7oi" path="res://src/world/world.gd" id="1_1fp7r"]
 [ext_resource type="TileSet" uid="uid://dks3mjl8otate" path="res://src/world/tiles/ground.tres" id="1_dphjl"]
-[ext_resource type="PackedScene" uid="uid://bwfyxwd4ucwa6" path="res://src/entity2d/player/player.tscn" id="2_sl2e5"]
-[ext_resource type="PackedScene" uid="uid://181spnr3m2rf" path="res://src/entity2d/demon_bat/demon_bat.tscn" id="4_6m72w"]
+[ext_resource type="PackedScene" uid="uid://bwfyxwd4ucwa6" path="res://src/character_body2d/player/player.tscn" id="2_sl2e5"]
+[ext_resource type="PackedScene" uid="uid://181spnr3m2rf" path="res://src/character_body2d/demon_bat/demon_bat.tscn" id="4_6m72w"]
 [ext_resource type="Script" uid="uid://cf0se1ejiqghq" path="res://src/world/astar_grid_navigation.gd" id="5_43c6p"]
 
 [node name="World" type="Node2D"]
