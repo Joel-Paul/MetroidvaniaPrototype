@@ -4,7 +4,6 @@ extends CharacterBody2D
 
 @onready var moveable: Moveable = %Moveable
 @onready var movement_sm: MovementSM = %MovementSM
-@onready var gravity: Gravity = %Gravity
 @onready var coyote_timer: Timer = %CoyoteTimer
 
 func _ready() -> void:
@@ -14,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		coyote_timer.start()
 	
-	velocity = moveable.velocity + gravity.gravity * delta
+	velocity = moveable.velocity
 	move_and_slide()
 	moveable.velocity = velocity
 	

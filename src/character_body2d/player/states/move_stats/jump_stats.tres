@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MoveStats" load_steps=2 format=3 uid="uid://bumitp4los1tx"]
+
+[ext_resource type="Script" uid="uid://t556l148hkeb" path="res://src/components/move_stats.gd" id="1_h1qo7"]
+
+[resource]
+script = ExtResource("1_h1qo7")
+speed = Vector2(120, 120)
+acceleration = Vector2(360, 360)
+deceleration = Vector2(240, 240)
+gravity = Vector2(0, 300)
+metadata/_custom_type_script = "uid://t556l148hkeb"

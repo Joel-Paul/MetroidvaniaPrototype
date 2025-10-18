@@ -23,10 +23,10 @@
 [ext_resource type="Script" uid="uid://dg84s3v4rc2p7" path="res://src/character_body2d/player/states/ground_state.gd" id="19_a31ob"]
 [ext_resource type="Script" uid="uid://cj7tcl04lybrm" path="res://src/components/action.gd" id="20_22ola"]
 [ext_resource type="Script" uid="uid://f5u205qq70y6" path="res://src/character_body2d/player/states/air_state.gd" id="22_0q6va"]
-[ext_resource type="Script" uid="uid://bkhkdkxhnbf4y" path="res://src/components/gravity.gd" id="22_m5tet"]
 [ext_resource type="Resource" uid="uid://4ao5u5lp8yek" path="res://src/character_body2d/player/states/move_stats/ground_stats.tres" id="24_t81xk"]
 [ext_resource type="Resource" uid="uid://i48c0ieunsco" path="res://src/character_body2d/player/states/move_stats/air_stats.tres" id="26_bcgkn"]
 [ext_resource type="Script" uid="uid://7x8s5gn03xo7" path="res://src/character_body2d/player/states/jump_state.gd" id="26_hk1vs"]
+[ext_resource type="Resource" uid="uid://bumitp4los1tx" path="res://src/character_body2d/player/states/move_stats/jump_stats.tres" id="27_t81xk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -1910,11 +1910,6 @@ script = ExtResource("18_0q6va")
 flippable = [NodePath("../Sprite2D"), NodePath("../Hurtbox"), NodePath("../NormalHitbox"), NodePath("../HeavyHitbox")]
 metadata/_custom_type_script = "uid://g075p6kl1x00"
 
-[node name="Gravity" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("22_m5tet")
-metadata/_custom_type_script = "uid://bkhkdkxhnbf4y"
-
 [node name="JumpAction" type="Node" parent="."]
 script = ExtResource("20_22ola")
 action_name = &"jump"
@@ -1951,9 +1946,10 @@ metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="JumpMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
 script = ExtResource("26_hk1vs")
+jump_vel = 240.0
 jump_action = NodePath("../../JumpAction")
 coyote_timer = NodePath("../../CoyoteTimer")
-move_stats = ExtResource("26_bcgkn")
+move_stats = ExtResource("27_t81xk")
 base_priority = 30.0
 next_states = [NodePath("../AirMovement"), NodePath("../GroundMovement")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"

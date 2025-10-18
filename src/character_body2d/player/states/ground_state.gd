@@ -7,8 +7,8 @@ func update(delta: float) -> void:
 	moveable.update(move_stats, delta)
 	
 	if absf(moveable.velocity.x) == 0:
-		player.play("idle")
+		anim_player.play("idle")
 	else:
-		player.play("run")
+		anim_player.play("run")
 	if moveable.direction.x != 0:
 		flippable.flip = moveable.direction.x < 0

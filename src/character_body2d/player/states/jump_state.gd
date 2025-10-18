@@ -1,6 +1,7 @@
 extends MovementState
 
 @export var jump_vel: float = 400
+@export_range(0, 1, 0.01, "suffix:×") var variable_jump_drag: float = 0.5
 @export var jump_action: Action
 @export var coyote_timer: Timer
 
@@ -14,10 +15,11 @@ func priority() -> float:
 func enter(_prev: State) -> void:
 	coyote_timer.stop()
 	moveable.velocity.y = -jump_vel
+	anim_player.play("rise")
 
 func update(delta: float) -> void:
 	if not jump_action.is_pressed():
-		moveable.velocity.y *= 0.5
+		moveable.velocity.y *= variable_jump_drag
 	moveable.update(move_stats, delta)
 
 func can_jump() -> bool:
