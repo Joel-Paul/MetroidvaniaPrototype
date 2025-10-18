@@ -21,6 +21,9 @@ func update(delta: float) -> void:
 	if not jump_action.is_pressed():
 		moveable.velocity.y *= variable_jump_drag
 	moveable.update(move_stats, delta)
+	
+	if moveable.direction.x != 0:
+		flippable.flip = moveable.direction.x < 0
 
 func can_jump() -> bool:
 	return jump_action.is_active() and not coyote_timer.is_stopped()
