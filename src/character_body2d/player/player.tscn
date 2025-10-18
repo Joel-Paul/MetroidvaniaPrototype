@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene load_steps=52 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Script" uid="uid://clc4jmx4gd18g" path="res://src/character_body2d/player/player.gd" id="1_5qgjf"]
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
@@ -27,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://i48c0ieunsco" path="res://src/character_body2d/player/states/move_stats/air_stats.tres" id="26_bcgkn"]
 [ext_resource type="Script" uid="uid://7x8s5gn03xo7" path="res://src/character_body2d/player/states/jump_state.gd" id="26_hk1vs"]
 [ext_resource type="Resource" uid="uid://bumitp4los1tx" path="res://src/character_body2d/player/states/move_stats/jump_stats.tres" id="27_t81xk"]
+[ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="28_bcgkn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -1848,6 +1849,9 @@ height = 18.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 radius = 9.99999
 
+[sub_resource type="LabelSettings" id="LabelSettings_gbqfn"]
+font_size = 32
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 script = ExtResource("1_5qgjf")
@@ -1959,3 +1963,17 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_top = -15.0
+offset_bottom = -15.0
+scale = Vector2(0.15, 0.15)
+use_top_left = true
+
+[node name="StateLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "GroundMovement"
+label_settings = SubResource("LabelSettings_gbqfn")
+script = ExtResource("28_bcgkn")
+
+[connection signal="switched_state" from="MovementSM" to="CenterContainer/StateLabel" method="_on_movement_sm_switched_state"]

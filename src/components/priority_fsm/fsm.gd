@@ -1,6 +1,8 @@
 class_name StateMachine
 extends State
 
+signal switched_state(old: State, new: State)
+
 var curr: State
 
 func init(character_body2d: CharacterBody2D, animation_player: AnimationPlayer) -> void:
@@ -23,4 +25,5 @@ func switch(next: State) -> void:
 		curr.active = false
 	next.enter(curr)
 	next.active = true
+	switched_state.emit(curr, next)
 	curr = next
