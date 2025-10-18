@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_m4kpu")
 speed = Vector2(120, 120)
-acceleration = Vector2(360, 360)
+acceleration = Vector2(480, 980)
 deceleration = Vector2(240, 240)
 metadata/_custom_type_script = "uid://t556l148hkeb"

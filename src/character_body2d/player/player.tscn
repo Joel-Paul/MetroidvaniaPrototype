@@ -1946,7 +1946,7 @@ metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="JumpMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
 script = ExtResource("26_hk1vs")
-jump_vel = 240.0
+jump_vel = 200.0
 jump_action = NodePath("../../JumpAction")
 coyote_timer = NodePath("../../CoyoteTimer")
 move_stats = ExtResource("27_t81xk")

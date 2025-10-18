@@ -18,3 +18,5 @@ func init(character_body2d: CharacterBody2D, animation_player: AnimationPlayer) 
 
 func update(delta: float) -> void:
 	moveable.update(move_stats, delta)
+	if moveable.direction.x != 0:
+		flippable.flip = moveable.direction.x < 0

@@ -17,6 +17,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	moveable.velocity = velocity
 	
-	moveable.direction = Input.get_axis("left", "right") * Vector2.RIGHT
+	moveable.direction = Input.get_axis("left", "right") * Vector2.RIGHT + Vector2.DOWN
 	movement_sm.update(delta)
 	

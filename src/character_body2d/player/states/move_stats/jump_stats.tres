@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_h1qo7")
-speed = Vector2(120, 120)
-acceleration = Vector2(360, 360)
-deceleration = Vector2(240, 240)
-gravity = Vector2(0, 300)
+speed = Vector2(120, 980)
+acceleration = Vector2(360, 400)
+deceleration = Vector2(240, 400)
 metadata/_custom_type_script = "uid://t556l148hkeb"
