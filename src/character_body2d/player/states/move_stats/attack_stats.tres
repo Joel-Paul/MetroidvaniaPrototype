@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_baf4g")
+speed = Vector2(0, 245)
 acceleration = Vector2(240, 980)
 deceleration = Vector2(240, 0)
 metadata/_custom_type_script = "uid://t556l148hkeb"
