@@ -1907,7 +1907,7 @@ metadata/_custom_type_script = "uid://dit8bpyua32wu"
 script = ExtResource("19_a31ob")
 move_stats = ExtResource("24_t81xk")
 base_priority = 10.0
-next_states = [NodePath("../AirMovement"), NodePath("../JumpMovement"), NodePath("../NormalCombo")]
+next_states = [NodePath("../AirMovement"), NodePath("../JumpMovement"), NodePath("../NormalAttackCombo")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="AirMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
@@ -1927,25 +1927,26 @@ base_priority = 30.0
 next_states = [NodePath("../AirMovement"), NodePath("../GroundMovement")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="NormalCombo" type="Node" parent="MovementSM" node_paths=PackedStringArray("parent", "action", "next_states")]
+[node name="NormalAttackCombo" type="Node" parent="MovementSM" node_paths=PackedStringArray("parent", "action", "next_states")]
 script = ExtResource("28_77qcm")
 parent = NodePath("..")
 action = NodePath("../../Actions/AttackAction")
+reset_time = 2.0
 next_states = [NodePath("NormalAttackA"), NodePath("NormalAttackB"), NodePath("NormalAttackC")]
 
-[node name="NormalAttackA" type="Node" parent="MovementSM/NormalCombo" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackA" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_a"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath(".."), NodePath("../../GroundMovement")]
 
-[node name="NormalAttackB" type="Node" parent="MovementSM/NormalCombo" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackB" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_b"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath(".."), NodePath("../../GroundMovement")]
 
-[node name="NormalAttackC" type="Node" parent="MovementSM/NormalCombo" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackC" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_c"
 move_stats = ExtResource("30_3ymln")
