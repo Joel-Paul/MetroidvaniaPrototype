@@ -10,6 +10,9 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed(action_name):
 		timer.start(buffer)
 
+func intercept() -> void:
+	timer.stop()
+
 func is_active() -> bool:
 	return not timer.is_stopped()
 

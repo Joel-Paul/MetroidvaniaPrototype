@@ -8,3 +8,6 @@ extends Node
 		flip = value
 		for node2d in flippable:
 			node2d.scale.x = -1 if flip else 1
+
+func get_facing() -> int:
+	return -1 if flip else 1

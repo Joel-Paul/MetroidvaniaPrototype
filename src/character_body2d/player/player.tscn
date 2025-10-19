@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene load_steps=55 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Script" uid="uid://clc4jmx4gd18g" path="res://src/character_body2d/player/player.gd" id="1_5qgjf"]
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
@@ -27,7 +27,10 @@
 [ext_resource type="Resource" uid="uid://i48c0ieunsco" path="res://src/character_body2d/player/states/move_stats/air_stats.tres" id="26_bcgkn"]
 [ext_resource type="Script" uid="uid://7x8s5gn03xo7" path="res://src/character_body2d/player/states/jump_state.gd" id="26_hk1vs"]
 [ext_resource type="Resource" uid="uid://bumitp4los1tx" path="res://src/character_body2d/player/states/move_stats/jump_stats.tres" id="27_t81xk"]
+[ext_resource type="Script" uid="uid://6paivyhn64ml" path="res://src/character_body2d/player/states/combo_state.gd" id="28_77qcm"]
 [ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="28_bcgkn"]
+[ext_resource type="Script" uid="uid://ba1oruqskxabv" path="res://src/character_body2d/player/states/attack_state.gd" id="28_gbqfn"]
+[ext_resource type="Resource" uid="uid://bq5t6dh5h5iat" path="res://src/character_body2d/player/states/move_stats/attack_stats.tres" id="30_3ymln"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -1410,51 +1413,37 @@ tracks/5/keys = {
 "update": 0,
 "values": [1.57079]
 }
-tracks/6/type = "method"
+tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".")
+tracks/6/path = NodePath("NormalHitbox/CollisionShape2D:shape:radius")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(100, 0)],
-"method": &"move_facing"
-}]
+"update": 0,
+"values": [9.99999]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("NormalHitbox/CollisionShape2D:shape:radius")
+tracks/7/path = NodePath("NormalHitbox/CollisionShape2D:shape:height")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [9.99999]
+"values": [30.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("NormalHitbox/CollisionShape2D:shape:height")
+tracks/8/path = NodePath("NormalHitbox/CollisionShape2D:disabled")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [30.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("NormalHitbox/CollisionShape2D:disabled")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -1537,51 +1526,37 @@ tracks/5/keys = {
 "update": 0,
 "values": [1.57079]
 }
-tracks/6/type = "method"
+tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".")
+tracks/6/path = NodePath("NormalHitbox/CollisionShape2D:shape:radius")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(100, 0)],
-"method": &"move_facing"
-}]
+"update": 0,
+"values": [6.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("NormalHitbox/CollisionShape2D:shape:radius")
+tracks/7/path = NodePath("NormalHitbox/CollisionShape2D:shape:height")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [6.0]
+"values": [25.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("NormalHitbox/CollisionShape2D:shape:height")
+tracks/8/path = NodePath("NormalHitbox/CollisionShape2D:disabled")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [25.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("NormalHitbox/CollisionShape2D:disabled")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -1664,51 +1639,37 @@ tracks/5/keys = {
 "update": 0,
 "values": [1.57079]
 }
-tracks/6/type = "method"
+tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".")
+tracks/6/path = NodePath("NormalHitbox/CollisionShape2D:shape:radius")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(100, 0)],
-"method": &"move_facing"
-}]
+"update": 0,
+"values": [9.99999]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("NormalHitbox/CollisionShape2D:shape:radius")
+tracks/7/path = NodePath("NormalHitbox/CollisionShape2D:shape:height")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [9.99999]
+"values": [23.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("NormalHitbox/CollisionShape2D:shape:height")
+tracks/8/path = NodePath("NormalHitbox/CollisionShape2D:disabled")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [23.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("NormalHitbox/CollisionShape2D:disabled")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -1914,10 +1875,18 @@ script = ExtResource("18_0q6va")
 flippable = [NodePath("../Sprite2D"), NodePath("../Hurtbox"), NodePath("../NormalHitbox"), NodePath("../HeavyHitbox")]
 metadata/_custom_type_script = "uid://g075p6kl1x00"
 
-[node name="JumpAction" type="Node" parent="."]
+[node name="Actions" type="Node" parent="."]
+
+[node name="JumpAction" type="Node" parent="Actions"]
 script = ExtResource("20_22ola")
 action_name = &"jump"
 buffer = 0.11666666666667
+metadata/_custom_type_script = "uid://cj7tcl04lybrm"
+
+[node name="AttackAction" type="Node" parent="Actions"]
+script = ExtResource("20_22ola")
+action_name = &"attack"
+buffer = 0.31666666666667
 metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 
 [node name="Moveable" type="Node" parent="."]
@@ -1938,7 +1907,7 @@ metadata/_custom_type_script = "uid://dit8bpyua32wu"
 script = ExtResource("19_a31ob")
 move_stats = ExtResource("24_t81xk")
 base_priority = 10.0
-next_states = [NodePath("../AirMovement"), NodePath("../JumpMovement")]
+next_states = [NodePath("../AirMovement"), NodePath("../JumpMovement"), NodePath("../NormalCombo")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="AirMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
@@ -1951,12 +1920,36 @@ metadata/_custom_type_script = "uid://g5ibefhptm11"
 [node name="JumpMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
 script = ExtResource("26_hk1vs")
 jump_vel = 200.0
-jump_action = NodePath("../../JumpAction")
+jump_action = NodePath("../../Actions/JumpAction")
 coyote_timer = NodePath("../../CoyoteTimer")
 move_stats = ExtResource("27_t81xk")
 base_priority = 30.0
 next_states = [NodePath("../AirMovement"), NodePath("../GroundMovement")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
+
+[node name="NormalCombo" type="Node" parent="MovementSM" node_paths=PackedStringArray("parent", "action", "next_states")]
+script = ExtResource("28_77qcm")
+parent = NodePath("..")
+action = NodePath("../../Actions/AttackAction")
+next_states = [NodePath("NormalAttackA"), NodePath("NormalAttackB"), NodePath("NormalAttackC")]
+
+[node name="NormalAttackA" type="Node" parent="MovementSM/NormalCombo" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"normal_combo_a"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath(".."), NodePath("../../GroundMovement")]
+
+[node name="NormalAttackB" type="Node" parent="MovementSM/NormalCombo" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"normal_combo_b"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath(".."), NodePath("../../GroundMovement")]
+
+[node name="NormalAttackC" type="Node" parent="MovementSM/NormalCombo" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"normal_combo_c"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath(".."), NodePath("../../GroundMovement")]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true

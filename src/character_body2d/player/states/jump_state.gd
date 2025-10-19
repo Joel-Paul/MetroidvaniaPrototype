@@ -12,6 +12,7 @@ func priority() -> float:
 	return 0.0
 
 func enter(_prev: State) -> void:
+	jump_action.intercept()
 	coyote_timer.stop()
 	moveable.velocity.y = -jump_vel
 	anim_player.play("rise")
