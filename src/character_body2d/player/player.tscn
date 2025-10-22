@@ -1927,12 +1927,17 @@ base_priority = 30.0
 next_states = [NodePath("../AirMovement"), NodePath("../GroundMovement")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="NormalAttackCombo" type="Node" parent="MovementSM" node_paths=PackedStringArray("parent", "action", "next_states")]
+[node name="NormalAttackCombo" type="Node" parent="MovementSM" node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
 script = ExtResource("28_77qcm")
-parent = NodePath("..")
+state_machine = NodePath("..")
 action = NodePath("../../Actions/AttackAction")
-reset_time = 2.0
+chain_buffer = NodePath("ChainBuffer")
 next_states = [NodePath("NormalAttackA"), NodePath("NormalAttackB"), NodePath("NormalAttackC")]
+
+[node name="ChainBuffer" type="Timer" parent="MovementSM/NormalAttackCombo"]
+process_callback = 0
+wait_time = 1.5
+one_shot = true
 
 [node name="NormalAttackA" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")

@@ -1,6 +1,9 @@
+class_name AttackState
 extends MovementState
 
 @export var animation_name: StringName
+
+var chain_buffer: Timer
 
 func priority() -> float:
 	if anim_player.is_playing():
@@ -12,3 +15,4 @@ func enter(_prev: State) -> void:
 
 func update(delta: float) -> void:
 	moveable.update(move_stats, delta)
+	chain_buffer.start()
