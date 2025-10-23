@@ -5,8 +5,8 @@ extends Area2D
 @export var attack: Attack
 
 func _ready() -> void:
-	area_entered.connect(_on_area_entered)
+	area_entered.connect(hit)
 
-func _on_area_entered(hurtbox: Hurtbox) -> void:
+func hit(hurtbox: Hurtbox) -> void:
 	attack.source = character.position
 	hurtbox.hurt(attack)
