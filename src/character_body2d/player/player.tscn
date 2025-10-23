@@ -1969,10 +1969,9 @@ offset_bottom = -15.0
 scale = Vector2(0.15, 0.15)
 use_top_left = true
 
-[node name="StateLabel" type="Label" parent="CenterContainer"]
+[node name="StateLabel" type="Label" parent="CenterContainer" node_paths=PackedStringArray("state_machine")]
 layout_mode = 2
 text = "GroundMovement"
 label_settings = SubResource("LabelSettings_gbqfn")
 script = ExtResource("28_bcgkn")
-
-[connection signal="switched_state" from="MovementSM" to="CenterContainer/StateLabel" method="_on_movement_sm_switched_state"]
+state_machine = NodePath("../../MovementSM")
