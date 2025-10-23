@@ -759,20 +759,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(150, -250)],
-"method": &"move_facing"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_rb4vx"]
 resource_name = "heavy_combo_b_end"
@@ -950,20 +936,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(150, -250)],
-"method": &"move_facing"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_p8nsm"]
@@ -1245,27 +1217,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("HeavyHitbox/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Vector2(150, -300)],
-"method": &"move_facing"
-}]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("HeavyHitbox/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1906,8 +1864,8 @@ attack = ExtResource("17_6ur7l")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeavyHitbox"]
-position = Vector2(10, 0)
-rotation = 1.5708
+position = Vector2(7, 2)
+rotation = 1.57079
 shape = SubResource("CapsuleShape2D_kvlxm")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
@@ -1931,6 +1889,12 @@ action_name = &"attack"
 buffer = 0.31666666666667
 metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 
+[node name="HeavyAttackAction" type="Node" parent="Actions"]
+script = ExtResource("20_22ola")
+action_name = &"heavy_attack"
+buffer = 0.31666666666667
+metadata/_custom_type_script = "uid://cj7tcl04lybrm"
+
 [node name="Moveable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
 unique_name_in_owner = true
 script = ExtResource("17_ehi18")
@@ -1943,62 +1907,92 @@ script = ExtResource("18_a31ob")
 moveable = NodePath("../Moveable")
 flippable = NodePath("../Flippable")
 base_priority = 0.0
-next_states = [NodePath("GroundMovement")]
+next_states = [NodePath("Ground")]
 metadata/_custom_type_script = "uid://dit8bpyua32wu"
 
-[node name="GroundMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
+[node name="Ground" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
 script = ExtResource("19_a31ob")
 move_stats = ExtResource("24_t81xk")
 base_priority = 10.0
-next_states = [NodePath("../AirMovement"), NodePath("../JumpMovement"), NodePath("../NormalAttackCombo")]
+next_states = [NodePath("../Air"), NodePath("../Jump"), NodePath("../NormalAttack"), NodePath("../HeavyAttack")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="AirMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
+[node name="Air" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
 script = ExtResource("22_0q6va")
 move_stats = ExtResource("26_bcgkn")
 base_priority = 20.0
-next_states = [NodePath("../GroundMovement"), NodePath("../JumpMovement")]
+next_states = [NodePath("../Ground"), NodePath("../Jump")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="JumpMovement" type="Node" parent="MovementSM" node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
+[node name="Jump" type="Node" parent="MovementSM" node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
 script = ExtResource("26_hk1vs")
 jump_vel = 200.0
 jump_action = NodePath("../../Actions/JumpAction")
 coyote_timer = NodePath("../../CoyoteTimer")
 move_stats = ExtResource("27_t81xk")
 base_priority = 30.0
-next_states = [NodePath("../AirMovement"), NodePath("../GroundMovement")]
+next_states = [NodePath("../Air"), NodePath("../Ground")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="NormalAttackCombo" type="Node" parent="MovementSM" node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
+[node name="NormalAttack" type="Node" parent="MovementSM" node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
 script = ExtResource("28_77qcm")
 state_machine = NodePath("..")
 action = NodePath("../../Actions/AttackAction")
 chain_buffer = NodePath("ChainBuffer")
 next_states = [NodePath("NormalAttackA"), NodePath("NormalAttackB"), NodePath("NormalAttackC")]
 
-[node name="ChainBuffer" type="Timer" parent="MovementSM/NormalAttackCombo"]
+[node name="ChainBuffer" type="Timer" parent="MovementSM/NormalAttack"]
 process_callback = 0
 wait_time = 1.5
 one_shot = true
 
-[node name="NormalAttackA" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackA" type="Node" parent="MovementSM/NormalAttack" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_a"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../GroundMovement")]
+next_states = [NodePath(".."), NodePath("../../Ground")]
 
-[node name="NormalAttackB" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackB" type="Node" parent="MovementSM/NormalAttack" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_b"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../GroundMovement")]
+next_states = [NodePath(".."), NodePath("../../Ground")]
 
-[node name="NormalAttackC" type="Node" parent="MovementSM/NormalAttackCombo" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackC" type="Node" parent="MovementSM/NormalAttack" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_c"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../GroundMovement")]
+next_states = [NodePath(".."), NodePath("../../Ground")]
+
+[node name="HeavyAttack" type="Node" parent="MovementSM" node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
+script = ExtResource("28_77qcm")
+state_machine = NodePath("..")
+action = NodePath("../../Actions/HeavyAttackAction")
+chain_buffer = NodePath("ChainBuffer")
+next_states = [NodePath("HeavyAttackA"), NodePath("HeavyAttackB"), NodePath("HeavyAttackC")]
+
+[node name="ChainBuffer" type="Timer" parent="MovementSM/HeavyAttack"]
+process_callback = 0
+wait_time = 1.5
+one_shot = true
+
+[node name="HeavyAttackA" type="Node" parent="MovementSM/HeavyAttack" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_a_start"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath(".."), NodePath("../../Ground")]
+
+[node name="HeavyAttackB" type="Node" parent="MovementSM/HeavyAttack" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_b_start"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath(".."), NodePath("../../Ground")]
+
+[node name="HeavyAttackC" type="Node" parent="MovementSM/HeavyAttack" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_c_start"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath(".."), NodePath("../../Ground")]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true
