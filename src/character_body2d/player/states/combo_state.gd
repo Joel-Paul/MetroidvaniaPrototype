@@ -34,4 +34,3 @@ func get_next() -> State:
 
 func _timeout() -> void:
 	index = 0
-	print("TA")

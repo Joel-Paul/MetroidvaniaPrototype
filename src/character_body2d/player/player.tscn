@@ -1864,10 +1864,9 @@ attack = ExtResource("17_6ur7l")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeavyHitbox"]
-position = Vector2(7, 2)
-rotation = 1.57079
+position = Vector2(10, 0)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_kvlxm")
-disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Flippable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
@@ -1969,30 +1968,60 @@ script = ExtResource("28_77qcm")
 state_machine = NodePath("..")
 action = NodePath("../../Actions/HeavyAttackAction")
 chain_buffer = NodePath("ChainBuffer")
-next_states = [NodePath("HeavyAttackA"), NodePath("HeavyAttackB"), NodePath("HeavyAttackC")]
+next_states = [NodePath("HeavyAttackA/HeavyAttackAStart"), NodePath("HeavyAttackB/HeavyAttackBStart")]
 
 [node name="ChainBuffer" type="Timer" parent="MovementSM/HeavyAttack"]
 process_callback = 0
 wait_time = 1.5
 one_shot = true
 
-[node name="HeavyAttackA" type="Node" parent="MovementSM/HeavyAttack" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackA" type="Node" parent="MovementSM/HeavyAttack"]
+
+[node name="HeavyAttackAStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_a_start"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../Ground")]
+next_states = [NodePath("../HeavyAttackAEnd")]
 
-[node name="HeavyAttackB" type="Node" parent="MovementSM/HeavyAttack" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackAEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_a_end"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath("../.."), NodePath("../../../Ground")]
+
+[node name="HeavyAttackB" type="Node" parent="MovementSM/HeavyAttack"]
+
+[node name="HeavyAttackBStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_b_start"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../Ground")]
+next_states = [NodePath("../HeavyAttackBEnd")]
 
-[node name="HeavyAttackC" type="Node" parent="MovementSM/HeavyAttack" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackBEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_b_end"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath("../.."), NodePath("../../../Ground")]
+
+[node name="HeavyAttackC" type="Node" parent="MovementSM/HeavyAttack"]
+
+[node name="HeavyAttackCStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_c_start"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../Ground")]
+next_states = [NodePath("../HeavyAttackCMid")]
+
+[node name="HeavyAttackCMid" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_c_mid"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath("../HeavyAttackCEnd")]
+
+[node name="HeavyAttackCEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
+script = ExtResource("28_gbqfn")
+animation_name = &"heavy_combo_c_end"
+move_stats = ExtResource("30_3ymln")
+next_states = [NodePath("../.."), NodePath("../../../Ground")]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true
