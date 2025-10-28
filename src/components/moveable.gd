@@ -14,4 +14,4 @@ func update(stats: MoveStats, delta: float):
 	velocity.y = move_toward(velocity.y, stats.speed.y * direction.y, acc.y * delta)
 
 func add_velocity_facing(vel: Vector2):
-	velocity += vel * flippable.get_facing()
+	velocity += vel * Vector2(flippable.get_facing(), 1)

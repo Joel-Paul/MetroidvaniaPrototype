@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene load_steps=56 format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Script" uid="uid://clc4jmx4gd18g" path="res://src/character_body2d/player/player.gd" id="1_5qgjf"]
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="28_bcgkn"]
 [ext_resource type="Script" uid="uid://ba1oruqskxabv" path="res://src/character_body2d/player/states/attack_state.gd" id="28_gbqfn"]
 [ext_resource type="Resource" uid="uid://bq5t6dh5h5iat" path="res://src/character_body2d/player/states/move_stats/attack_stats.tres" id="30_3ymln"]
+[ext_resource type="Script" uid="uid://dwtdhmik2uoh4" path="res://src/character_body2d/player/states/attack_state_end.gd" id="31_pqg44"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -759,6 +760,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Moveable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(80, -200)],
+"method": &"add_velocity_facing"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_rb4vx"]
 resource_name = "heavy_combo_b_end"
@@ -936,6 +951,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Moveable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(90, -210)],
+"method": &"add_velocity_facing"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_p8nsm"]
@@ -1228,6 +1257,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Moveable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(100, -220)],
+"method": &"add_velocity_facing"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_4hvnv"]
@@ -1867,6 +1910,7 @@ metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 position = Vector2(10, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_kvlxm")
+disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Flippable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
@@ -1891,7 +1935,7 @@ metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 [node name="HeavyAttackAction" type="Node" parent="Actions"]
 script = ExtResource("20_22ola")
 action_name = &"heavy_attack"
-buffer = 0.31666666666667
+buffer = 0.51666666666667
 metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 
 [node name="Moveable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
@@ -1937,10 +1981,10 @@ metadata/_custom_type_script = "uid://g5ibefhptm11"
 script = ExtResource("28_77qcm")
 state_machine = NodePath("..")
 action = NodePath("../../Actions/AttackAction")
-chain_buffer = NodePath("ChainBuffer")
+chain_buffer = NodePath("NormalAttackBuffer")
 next_states = [NodePath("NormalAttackA"), NodePath("NormalAttackB"), NodePath("NormalAttackC")]
 
-[node name="ChainBuffer" type="Timer" parent="MovementSM/NormalAttack"]
+[node name="NormalAttackBuffer" type="Timer" parent="MovementSM/NormalAttack"]
 process_callback = 0
 wait_time = 1.5
 one_shot = true
@@ -1967,10 +2011,10 @@ next_states = [NodePath(".."), NodePath("../../Ground")]
 script = ExtResource("28_77qcm")
 state_machine = NodePath("..")
 action = NodePath("../../Actions/HeavyAttackAction")
-chain_buffer = NodePath("ChainBuffer")
-next_states = [NodePath("HeavyAttackA/HeavyAttackAStart"), NodePath("HeavyAttackB/HeavyAttackBStart")]
+chain_buffer = NodePath("HeavyAttackBuffer")
+next_states = [NodePath("HeavyAttackA/HeavyAttackAStart"), NodePath("HeavyAttackB/HeavyAttackBStart"), NodePath("HeavyAttackC/HeavyAttackCStart")]
 
-[node name="ChainBuffer" type="Timer" parent="MovementSM/HeavyAttack"]
+[node name="HeavyAttackBuffer" type="Timer" parent="MovementSM/HeavyAttack"]
 process_callback = 0
 wait_time = 1.5
 one_shot = true
@@ -1984,7 +2028,7 @@ move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackAEnd")]
 
 [node name="HeavyAttackAEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" node_paths=PackedStringArray("next_states")]
-script = ExtResource("28_gbqfn")
+script = ExtResource("31_pqg44")
 animation_name = &"heavy_combo_a_end"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
@@ -1998,7 +2042,7 @@ move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackBEnd")]
 
 [node name="HeavyAttackBEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" node_paths=PackedStringArray("next_states")]
-script = ExtResource("28_gbqfn")
+script = ExtResource("31_pqg44")
 animation_name = &"heavy_combo_b_end"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
@@ -2018,9 +2062,10 @@ move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackCEnd")]
 
 [node name="HeavyAttackCEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
-script = ExtResource("28_gbqfn")
+script = ExtResource("31_pqg44")
 animation_name = &"heavy_combo_c_end"
 move_stats = ExtResource("30_3ymln")
+base_priority = 60.0
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
