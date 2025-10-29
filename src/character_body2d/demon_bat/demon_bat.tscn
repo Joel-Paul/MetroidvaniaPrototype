@@ -1,10 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene load_steps=21 format=3 uid="uid://181spnr3m2rf"]
 
+[ext_resource type="Script" uid="uid://8fo7q5apam3d" path="res://src/character_body2d/demon_bat/demon_bat.gd" id="1_6iml5"]
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
 [ext_resource type="Texture2D" uid="uid://bujkf80bbj2pw" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-bite.png" id="2_5iah6"]
 [ext_resource type="Texture2D" uid="uid://dm60tbndqek8c" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-death.png" id="3_1f3xe"]
 [ext_resource type="Texture2D" uid="uid://gdh3kttso7vi" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-fire-projectile.png" id="4_gf7tn"]
 [ext_resource type="Texture2D" uid="uid://bvftdudqcdoto" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-knockback.png" id="5_ier4g"]
+[ext_resource type="Script" uid="uid://bneifgyo2s1wi" path="res://src/components/priority_fsm/movement_sm.gd" id="7_cr8un"]
+[ext_resource type="Script" uid="uid://cg3uw0dwwxh6s" path="res://src/components/moveable.gd" id="7_i4pe4"]
+[ext_resource type="Script" uid="uid://g075p6kl1x00" path="res://src/components/flippable.gd" id="8_2uvct"]
+[ext_resource type="Script" uid="uid://dbdu17f78vd75" path="res://src/character_body2d/demon_bat/states/chase_state.gd" id="10_2uvct"]
+[ext_resource type="Script" uid="uid://t556l148hkeb" path="res://src/components/move_stats.gd" id="11_cbrw7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
 radius = 6.0
@@ -264,9 +270,17 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
+[sub_resource type="Resource" id="Resource_nwcok"]
+script = ExtResource("11_cbrw7")
+speed = Vector2(45, 45)
+acceleration = Vector2(60, 60)
+deceleration = Vector2(60, 60)
+metadata/_custom_type_script = "uid://t556l148hkeb"
+
 [node name="DemonBat" type="CharacterBody2D"]
 collision_layer = 0
 motion_mode = 1
+script = ExtResource("1_6iml5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -278,6 +292,7 @@ offset = Vector2(0, -6.5)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_5iah6")
 }
@@ -285,3 +300,29 @@ autoplay = "flying"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+
+[node name="Moveable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
+unique_name_in_owner = true
+script = ExtResource("7_i4pe4")
+flippable = NodePath("../Flippable")
+metadata/_custom_type_script = "uid://cg3uw0dwwxh6s"
+
+[node name="Flippable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
+script = ExtResource("8_2uvct")
+flippable = [NodePath("../Sprite2D")]
+metadata/_custom_type_script = "uid://g075p6kl1x00"
+
+[node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("moveable", "flippable", "next_states")]
+unique_name_in_owner = true
+script = ExtResource("7_cr8un")
+moveable = NodePath("../Moveable")
+flippable = NodePath("../Flippable")
+next_states = [NodePath("Chase")]
+metadata/_custom_type_script = "uid://bneifgyo2s1wi"
+
+[node name="Chase" type="Node" parent="MovementSM" node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("10_2uvct")
+nav_agent = NodePath("../../NavigationAgent2D")
+nav_update_interval = 1.0
+move_stats = SubResource("Resource_nwcok")
+metadata/_custom_type_script = "uid://g5ibefhptm11"
