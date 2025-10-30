@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene load_steps=23 format=3 uid="uid://181spnr3m2rf"]
 
 [ext_resource type="Script" uid="uid://8fo7q5apam3d" path="res://src/character_body2d/demon_bat/demon_bat.gd" id="1_6iml5"]
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
@@ -10,10 +10,16 @@
 [ext_resource type="Script" uid="uid://cg3uw0dwwxh6s" path="res://src/components/moveable.gd" id="7_i4pe4"]
 [ext_resource type="Script" uid="uid://g075p6kl1x00" path="res://src/components/flippable.gd" id="8_2uvct"]
 [ext_resource type="Script" uid="uid://dbdu17f78vd75" path="res://src/character_body2d/demon_bat/states/chase_state.gd" id="10_2uvct"]
-[ext_resource type="Script" uid="uid://t556l148hkeb" path="res://src/components/move_stats.gd" id="11_cbrw7"]
+[ext_resource type="Resource" uid="uid://vq52agh0afud" path="res://src/character_body2d/demon_bat/states/move_stats/chase_stats.tres" id="11_ubwcd"]
+[ext_resource type="Script" uid="uid://d0ecuctvp3b8" path="res://src/character_body2d/demon_bat/states/bite_state.gd" id="12_ubwcd"]
+[ext_resource type="Resource" uid="uid://debolfpvgcok5" path="res://src/character_body2d/demon_bat/states/move_stats/bite_stats.tres" id="13_ubwcd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
-radius = 6.0
+radius = 4.5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ubwcd"]
+radius = 7.0
+height = 64.0
 
 [sub_resource type="Animation" id="Animation_bc8ra"]
 length = 0.001
@@ -270,23 +276,29 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
-[sub_resource type="Resource" id="Resource_nwcok"]
-script = ExtResource("11_cbrw7")
-speed = Vector2(45, 45)
-acceleration = Vector2(60, 60)
-deceleration = Vector2(60, 60)
-metadata/_custom_type_script = "uid://t556l148hkeb"
-
 [node name="DemonBat" type="CharacterBody2D"]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_6iml5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1pbn3")
 
+[node name="BiteArea" type="Area2D" parent="."]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+position = Vector2(0, -1)
+rotation = 1.5707941
+shape = SubResource("CapsuleShape2D_ubwcd")
+debug_color = Color(1, 1, 1, 0)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6.5)
 texture = ExtResource("1_f2bij")
 offset = Vector2(0, -6.5)
 hframes = 4
@@ -320,9 +332,18 @@ flippable = NodePath("../Flippable")
 next_states = [NodePath("Chase")]
 metadata/_custom_type_script = "uid://bneifgyo2s1wi"
 
-[node name="Chase" type="Node" parent="MovementSM" node_paths=PackedStringArray("nav_agent")]
+[node name="Chase" type="Node" parent="MovementSM" node_paths=PackedStringArray("nav_agent", "next_states")]
 script = ExtResource("10_2uvct")
 nav_agent = NodePath("../../NavigationAgent2D")
-nav_update_interval = 1.0
-move_stats = SubResource("Resource_nwcok")
+nav_update_interval = 0.5
+move_stats = ExtResource("11_ubwcd")
+next_states = [NodePath("../Bite")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
+
+[node name="Bite" type="Node" parent="MovementSM" node_paths=PackedStringArray("bite_area", "next_states")]
+script = ExtResource("12_ubwcd")
+bite_area = NodePath("../../BiteArea")
+animation_name = &"bite"
+move_stats = ExtResource("13_ubwcd")
+next_states = [NodePath("../Chase")]
+metadata/_custom_type_script = "uid://ba1oruqskxabv"

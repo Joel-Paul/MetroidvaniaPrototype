@@ -1,19 +1,25 @@
 extends MovementState
 
 @export var nav_agent: NavigationAgent2D
-@export_range(0, 5, 0.01, "or_greater", "suffix:s") var nav_update_interval: float = 0.5
+@export_range(0, 5, 0.01, "or_greater", "suffix:s") var nav_update_interval: float = 1
 
 @onready var player: CharacterBody2D = Global.get_player()
 @onready var nav_timer: Timer = Global.create_timer(self, false)
 
 func _ready() -> void:
+	_update_target()
 	nav_timer.timeout.connect(_update_target)
 	nav_timer.start(nav_update_interval)
 
 func priority() -> float:
-	if player:
+	if nav_agent.is_target_reached():
+		return base_priority * 0.9
+	if nav_agent.is_target_reachable():
 		return base_priority
 	return 0
+
+func enter(_prev: State) -> void:
+	anim_player.play("flying")
 
 func _update_target() -> void:
 	if not player: return
