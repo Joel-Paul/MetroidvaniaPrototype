@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene load_steps=27 format=3 uid="uid://181spnr3m2rf"]
 
 [ext_resource type="Script" uid="uid://8fo7q5apam3d" path="res://src/character_body2d/demon_bat/demon_bat.gd" id="1_6iml5"]
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
@@ -13,20 +13,18 @@
 [ext_resource type="Resource" uid="uid://vq52agh0afud" path="res://src/character_body2d/demon_bat/states/move_stats/chase_stats.tres" id="11_ubwcd"]
 [ext_resource type="Script" uid="uid://d0ecuctvp3b8" path="res://src/character_body2d/demon_bat/states/bite_state.gd" id="12_ubwcd"]
 [ext_resource type="Resource" uid="uid://debolfpvgcok5" path="res://src/character_body2d/demon_bat/states/move_stats/bite_stats.tres" id="13_ubwcd"]
+[ext_resource type="Script" uid="uid://yxkpowh7gjvn" path="res://src/character_body2d/demon_bat/states/fire_projectile_state.gd" id="14_vladw"]
+[ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="15_n2rgj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
 radius = 4.5
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ubwcd"]
-radius = 7.0
-height = 64.0
 
 [sub_resource type="Animation" id="Animation_bc8ra"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,7 +36,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +48,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -67,7 +65,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +77,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -91,7 +89,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -122,7 +120,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -134,7 +132,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -146,7 +144,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -163,7 +161,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -175,7 +173,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -187,7 +185,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -195,6 +193,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MovementSM/FireProjectile")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"charge_projectile"
+}, {
+"args": [],
+"method": &"shoot_projectile"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ycy4p"]
@@ -205,7 +220,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -217,7 +232,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -229,7 +244,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -246,7 +261,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -258,7 +273,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -270,7 +285,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -290,6 +305,17 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ubwcd"]
+radius = 7.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vladw"]
+radius = 32.0
+height = 254.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_o16xn"]
+font_size = 32
+
 [node name="DemonBat" type="CharacterBody2D"]
 collision_layer = 0
 motion_mode = 1
@@ -299,23 +325,6 @@ script = ExtResource("1_6iml5")
 position = Vector2(0, -6.5)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1pbn3")
-
-[node name="BiteArea" type="Area2D" parent="."]
-position = Vector2(0, -1)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
-position = Vector2(0, -1)
-rotation = 1.5707941
-shape = SubResource("CapsuleShape2D_ubwcd")
-debug_color = Color(1, 1, 1, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -6.5)
-texture = ExtResource("1_f2bij")
-offset = Vector2(0, -6.5)
-hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -333,10 +342,39 @@ script = ExtResource("7_i4pe4")
 flippable = NodePath("../Flippable")
 metadata/_custom_type_script = "uid://cg3uw0dwwxh6s"
 
-[node name="Flippable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
+[node name="Flippable" type="Node2D" parent="."]
 script = ExtResource("8_2uvct")
-flippable = [NodePath("../Sprite2D")]
-metadata/_custom_type_script = "uid://g075p6kl1x00"
+
+[node name="Sprite2D" type="Sprite2D" parent="Flippable"]
+position = Vector2(0, -6.5)
+texture = ExtResource("1_f2bij")
+offset = Vector2(0, -6.5)
+hframes = 4
+
+[node name="ProjectileMarker" type="Marker2D" parent="Flippable"]
+position = Vector2(7, 2)
+
+[node name="BiteRange" type="Area2D" parent="Flippable"]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/BiteRange"]
+position = Vector2(0, -1)
+rotation = 1.5707941
+shape = SubResource("CapsuleShape2D_ubwcd")
+debug_color = Color(1, 1, 1, 0)
+
+[node name="ShootRange" type="Area2D" parent="Flippable"]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/ShootRange"]
+position = Vector2(0, -2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_vladw")
+debug_color = Color(1, 1, 1, 0)
 
 [node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("moveable", "flippable", "next_states")]
 unique_name_in_owner = true
@@ -351,13 +389,38 @@ script = ExtResource("10_2uvct")
 nav_agent = NodePath("../../NavigationAgent2D")
 nav_update_interval = 0.1
 move_stats = ExtResource("11_ubwcd")
-next_states = [NodePath("../Bite")]
+next_states = [NodePath("../Bite"), NodePath("../FireProjectile")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="Bite" type="Node" parent="MovementSM" node_paths=PackedStringArray("bite_area", "next_states")]
+[node name="Bite" type="Node" parent="MovementSM" node_paths=PackedStringArray("bite_range", "next_states")]
 script = ExtResource("12_ubwcd")
-bite_area = NodePath("../../BiteArea")
+bite_range = NodePath("../../Flippable/BiteRange")
 animation_name = &"bite"
 move_stats = ExtResource("13_ubwcd")
 next_states = [NodePath("../Chase")]
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
+
+[node name="FireProjectile" type="Node" parent="MovementSM" node_paths=PackedStringArray("shoot_range", "projectile_marker", "next_states")]
+script = ExtResource("14_vladw")
+shoot_range = NodePath("../../Flippable/ShootRange")
+projectile_marker = NodePath("../../Flippable/ProjectileMarker")
+projectile_speed = 120.0
+shoot_interval = 2.0
+animation_name = &"fire_projectile"
+move_stats = ExtResource("13_ubwcd")
+base_priority = 100.0
+next_states = [NodePath("../Chase")]
+metadata/_custom_type_script = "uid://ba1oruqskxabv"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_top = -15.0
+offset_bottom = -15.0
+scale = Vector2(0.15, 0.15)
+use_top_left = true
+
+[node name="StateLabel" type="Label" parent="CenterContainer" node_paths=PackedStringArray("state_machine")]
+layout_mode = 2
+text = "GroundMovement"
+label_settings = SubResource("LabelSettings_o16xn")
+script = ExtResource("15_n2rgj")
+state_machine = NodePath("../../MovementSM")
