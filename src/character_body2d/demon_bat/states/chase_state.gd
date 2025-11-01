@@ -9,7 +9,6 @@ extends MovementState
 func _ready() -> void:
 	_update_target()
 	nav_timer.timeout.connect(_update_target)
-	nav_timer.start(nav_update_interval)
 
 func priority() -> float:
 	if nav_agent.is_target_reached():
@@ -19,7 +18,11 @@ func priority() -> float:
 	return 0
 
 func enter(_prev: State) -> void:
+	nav_timer.start(nav_update_interval)
 	anim_player.play("flying")
+
+func exit(_next: State) -> void:
+	nav_timer.stop()
 
 func _update_target() -> void:
 	if not player: return
