@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://dks3mjl8otate"]
+[gd_resource type="TileSet" format=3 uid="uid://dks3mjl8otate"]
 
 [ext_resource type="Texture2D" uid="uid://bm1dp4c4jqm1i" path="res://assets/pixramen-valley-asset-pack-v2/tilesheet/spritesheets/1x/tilesheet.png" id="1_nu2oc"]
 

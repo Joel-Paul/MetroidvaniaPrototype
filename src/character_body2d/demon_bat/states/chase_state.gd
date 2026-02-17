@@ -20,6 +20,7 @@ func priority() -> float:
 func enter(_prev: State) -> void:
 	nav_timer.start(nav_update_interval)
 	anim_player.play("flying")
+	_update_target()
 
 func exit(_next: State) -> void:
 	nav_timer.stop()

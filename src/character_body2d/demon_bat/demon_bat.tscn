@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://181spnr3m2rf"]
+[gd_scene format=3 uid="uid://181spnr3m2rf"]
 
 [ext_resource type="Script" uid="uid://8fo7q5apam3d" path="res://src/character_body2d/demon_bat/demon_bat.gd" id="1_6iml5"]
 [ext_resource type="Texture2D" uid="uid://bmolhhigeorso" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-flying.png" id="1_f2bij"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="15_n2rgj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
-radius = 4.5
+radius = 6.0
 
 [sub_resource type="Animation" id="Animation_bc8ra"]
 length = 0.001
@@ -108,7 +108,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [60.0],
+"args": [100.0],
 "method": &"add_speed_in_direction"
 }]
 }
@@ -305,78 +305,96 @@ _data = {
 &"knockback": SubResource("Animation_i2djr")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ubwcd"]
-radius = 7.0
-height = 64.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_n2rgj"]
+radius = 50.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vladw"]
-radius = 32.0
-height = 254.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_o16xn"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jk0q6"]
+radius = 70.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_o16xn"]
 font_size = 32
 
-[node name="DemonBat" type="CharacterBody2D"]
+[node name="DemonBat" type="CharacterBody2D" unique_id=2031447380]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_6iml5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=72051021]
 position = Vector2(0, -6.5)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1pbn3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1540133810]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_5iah6")
-}
-autoplay = "flying"
+libraries/ = SubResource("AnimationLibrary_5iah6")
+autoplay = &"flying"
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=473507788]
 path_postprocessing = 1
 
-[node name="Moveable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
+[node name="Moveable" type="Node" parent="." unique_id=1229833907 node_paths=PackedStringArray("flippable")]
 unique_name_in_owner = true
 script = ExtResource("7_i4pe4")
 flippable = NodePath("../Flippable")
 metadata/_custom_type_script = "uid://cg3uw0dwwxh6s"
 
-[node name="Flippable" type="Node2D" parent="."]
+[node name="PlayerRayCast" type="RayCast2D" parent="." unique_id=1932913646]
+position = Vector2(0, 8)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="Flippable" type="Node2D" parent="." unique_id=1202692950]
 script = ExtResource("8_2uvct")
 
-[node name="Sprite2D" type="Sprite2D" parent="Flippable"]
+[node name="Sprite2D" type="Sprite2D" parent="Flippable" unique_id=930391420]
 position = Vector2(0, -6.5)
 texture = ExtResource("1_f2bij")
 offset = Vector2(0, -6.5)
 hframes = 4
 
-[node name="ProjectileMarker" type="Marker2D" parent="Flippable"]
+[node name="ProjectileMarker" type="Marker2D" parent="Flippable" unique_id=1841008052]
 position = Vector2(7, 2)
 
-[node name="BiteRange" type="Area2D" parent="Flippable"]
+[node name="BiteRange" type="Area2D" parent="Flippable" unique_id=384317560]
 position = Vector2(0, -1)
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/BiteRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/BiteRange" unique_id=899095806]
 position = Vector2(0, -1)
 rotation = 1.5707941
-shape = SubResource("CapsuleShape2D_ubwcd")
+shape = SubResource("CircleShape2D_n2rgj")
 debug_color = Color(1, 1, 1, 0)
 
-[node name="ShootRange" type="Area2D" parent="Flippable"]
+[node name="ShootEnabledRange" type="Area2D" parent="Flippable" unique_id=67782801]
 position = Vector2(0, -1)
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/ShootRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/ShootEnabledRange" unique_id=1929939971]
 position = Vector2(0, -2)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_vladw")
+shape = SubResource("CircleShape2D_o16xn")
 debug_color = Color(1, 1, 1, 0)
 
-[node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("moveable", "flippable", "next_states")]
+[node name="ShootDisabledRange" type="Area2D" parent="Flippable" unique_id=663210926]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/ShootDisabledRange" unique_id=664360478]
+position = Vector2(0, -2)
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_jk0q6")
+debug_color = Color(1, 1, 1, 0)
+
+[node name="MovementSM" type="Node" parent="." unique_id=958912840 node_paths=PackedStringArray("moveable", "flippable", "next_states")]
 unique_name_in_owner = true
 script = ExtResource("7_cr8un")
 moveable = NodePath("../Moveable")
@@ -384,7 +402,7 @@ flippable = NodePath("../Flippable")
 next_states = [NodePath("Chase")]
 metadata/_custom_type_script = "uid://bneifgyo2s1wi"
 
-[node name="Chase" type="Node" parent="MovementSM" node_paths=PackedStringArray("nav_agent", "next_states")]
+[node name="Chase" type="Node" parent="MovementSM" unique_id=2116760706 node_paths=PackedStringArray("nav_agent", "next_states")]
 script = ExtResource("10_2uvct")
 nav_agent = NodePath("../../NavigationAgent2D")
 nav_update_interval = 0.1
@@ -392,17 +410,20 @@ move_stats = ExtResource("11_ubwcd")
 next_states = [NodePath("../Bite"), NodePath("../FireProjectile")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="Bite" type="Node" parent="MovementSM" node_paths=PackedStringArray("bite_range", "next_states")]
+[node name="Bite" type="Node" parent="MovementSM" unique_id=2109303204 node_paths=PackedStringArray("bite_range", "player_raycast", "next_states")]
 script = ExtResource("12_ubwcd")
 bite_range = NodePath("../../Flippable/BiteRange")
+player_raycast = NodePath("../../PlayerRayCast")
 animation_name = &"bite"
 move_stats = ExtResource("13_ubwcd")
 next_states = [NodePath("../Chase")]
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
 
-[node name="FireProjectile" type="Node" parent="MovementSM" node_paths=PackedStringArray("shoot_range", "projectile_marker", "next_states")]
+[node name="FireProjectile" type="Node" parent="MovementSM" unique_id=1728869548 node_paths=PackedStringArray("shoot_enabled", "shoot_disabled", "player_raycast", "projectile_marker", "next_states")]
 script = ExtResource("14_vladw")
-shoot_range = NodePath("../../Flippable/ShootRange")
+shoot_enabled = NodePath("../../Flippable/ShootEnabledRange")
+shoot_disabled = NodePath("../../Flippable/ShootDisabledRange")
+player_raycast = NodePath("../../PlayerRayCast")
 projectile_marker = NodePath("../../Flippable/ProjectileMarker")
 projectile_speed = 240.0
 shoot_interval = 2.0
@@ -412,13 +433,13 @@ base_priority = 100.0
 next_states = [NodePath("../Chase")]
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="StateDebug" type="CenterContainer" parent="." unique_id=1541480480]
 offset_top = -15.0
 offset_bottom = -15.0
 scale = Vector2(0.15, 0.15)
 use_top_left = true
 
-[node name="StateLabel" type="Label" parent="CenterContainer" node_paths=PackedStringArray("state_machine")]
+[node name="StateLabel" type="Label" parent="StateDebug" unique_id=131056241 node_paths=PackedStringArray("state_machine")]
 layout_mode = 2
 text = "GroundMovement"
 label_settings = SubResource("LabelSettings_o16xn")

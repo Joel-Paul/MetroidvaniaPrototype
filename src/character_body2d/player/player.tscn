@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bwfyxwd4ucwa6"]
+[gd_scene format=3 uid="uid://bwfyxwd4ucwa6"]
 
 [ext_resource type="Script" uid="uid://clc4jmx4gd18g" path="res://src/character_body2d/player/player.gd" id="1_5qgjf"]
 [ext_resource type="Texture2D" uid="uid://dtyr2r6y7x7o8" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-idle.png" id="1_8afob"]
@@ -1856,38 +1856,36 @@ radius = 9.99999
 [sub_resource type="LabelSettings" id="LabelSettings_gbqfn"]
 font_size = 32
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1535126373 groups=["player"]]
 collision_layer = 0
 script = ExtResource("1_5qgjf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=983941365]
 shape = SubResource("CapsuleShape2D_dovo2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1486154696]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_kvlxm")
-}
-autoplay = "idle"
+libraries/ = SubResource("AnimationLibrary_kvlxm")
+autoplay = &"idle"
 
-[node name="Flippable" type="Node2D" parent="."]
+[node name="Flippable" type="Node2D" parent="." unique_id=1486553285]
 script = ExtResource("18_0q6va")
 
-[node name="Sprite2D" type="Sprite2D" parent="Flippable"]
+[node name="Sprite2D" type="Sprite2D" parent="Flippable" unique_id=1381665675]
 texture = ExtResource("1_8afob")
 offset = Vector2(2.5, -24)
 hframes = 2
 
-[node name="Hurtbox" type="Area2D" parent="Flippable"]
+[node name="Hurtbox" type="Area2D" parent="Flippable" unique_id=521998496]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("15_ufn7j")
 metadata/_custom_type_script = "uid://560el77vul8n"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Hurtbox" unique_id=2073024361]
 shape = SubResource("CapsuleShape2D_s3vi5")
 
-[node name="NormalHitbox" type="Area2D" parent="Flippable" node_paths=PackedStringArray("node2d")]
+[node name="NormalHitbox" type="Area2D" parent="Flippable" unique_id=1588735940 node_paths=PackedStringArray("node2d")]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
@@ -1896,14 +1894,14 @@ node2d = NodePath("../..")
 attack = ExtResource("17_6ur7l")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/NormalHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/NormalHitbox" unique_id=406598935]
 position = Vector2(0, -10)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_kvlxm")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="HeavyHitbox" type="Area2D" parent="Flippable" node_paths=PackedStringArray("node2d")]
+[node name="HeavyHitbox" type="Area2D" parent="Flippable" unique_id=1968337866 node_paths=PackedStringArray("node2d")]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
@@ -1912,40 +1910,40 @@ node2d = NodePath("../..")
 attack = ExtResource("17_6ur7l")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/HeavyHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/HeavyHitbox" unique_id=939919436]
 position = Vector2(10, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_kvlxm")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="Actions" type="Node" parent="."]
+[node name="Actions" type="Node" parent="." unique_id=60276072]
 
-[node name="JumpAction" type="Node" parent="Actions"]
+[node name="JumpAction" type="Node" parent="Actions" unique_id=1653641848]
 script = ExtResource("20_22ola")
 action_name = &"jump"
 buffer = 0.11666666666667
 metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 
-[node name="AttackAction" type="Node" parent="Actions"]
+[node name="AttackAction" type="Node" parent="Actions" unique_id=808278895]
 script = ExtResource("20_22ola")
 action_name = &"attack"
 buffer = 0.31666666666667
 metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 
-[node name="HeavyAttackAction" type="Node" parent="Actions"]
+[node name="HeavyAttackAction" type="Node" parent="Actions" unique_id=1437200914]
 script = ExtResource("20_22ola")
 action_name = &"heavy_attack"
 buffer = 0.51666666666667
 metadata/_custom_type_script = "uid://cj7tcl04lybrm"
 
-[node name="Moveable" type="Node" parent="." node_paths=PackedStringArray("flippable")]
+[node name="Moveable" type="Node" parent="." unique_id=1357589620 node_paths=PackedStringArray("flippable")]
 unique_name_in_owner = true
 script = ExtResource("17_ehi18")
 flippable = NodePath("../Flippable")
 metadata/_custom_type_script = "uid://cg3uw0dwwxh6s"
 
-[node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("moveable", "flippable", "next_states")]
+[node name="MovementSM" type="Node" parent="." unique_id=960325522 node_paths=PackedStringArray("moveable", "flippable", "next_states")]
 unique_name_in_owner = true
 script = ExtResource("18_a31ob")
 moveable = NodePath("../Moveable")
@@ -1954,21 +1952,21 @@ base_priority = 0.0
 next_states = [NodePath("Ground")]
 metadata/_custom_type_script = "uid://dit8bpyua32wu"
 
-[node name="Ground" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
+[node name="Ground" type="Node" parent="MovementSM" unique_id=1984772266 node_paths=PackedStringArray("next_states")]
 script = ExtResource("19_a31ob")
 move_stats = ExtResource("24_t81xk")
 base_priority = 10.0
 next_states = [NodePath("../Air"), NodePath("../Jump"), NodePath("../NormalAttack"), NodePath("../HeavyAttack")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="Air" type="Node" parent="MovementSM" node_paths=PackedStringArray("next_states")]
+[node name="Air" type="Node" parent="MovementSM" unique_id=318626775 node_paths=PackedStringArray("next_states")]
 script = ExtResource("22_0q6va")
 move_stats = ExtResource("26_bcgkn")
 base_priority = 20.0
 next_states = [NodePath("../Ground"), NodePath("../Jump")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="Jump" type="Node" parent="MovementSM" node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
+[node name="Jump" type="Node" parent="MovementSM" unique_id=442713493 node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
 script = ExtResource("26_hk1vs")
 jump_vel = 200.0
 jump_action = NodePath("../../Actions/JumpAction")
@@ -1978,110 +1976,110 @@ base_priority = 30.0
 next_states = [NodePath("../Air"), NodePath("../Ground")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="NormalAttack" type="Node" parent="MovementSM" node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
+[node name="NormalAttack" type="Node" parent="MovementSM" unique_id=387088156 node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
 script = ExtResource("28_77qcm")
 state_machine = NodePath("..")
 action = NodePath("../../Actions/AttackAction")
 chain_buffer = NodePath("NormalAttackBuffer")
 next_states = [NodePath("NormalAttackA"), NodePath("NormalAttackB"), NodePath("NormalAttackC")]
 
-[node name="NormalAttackBuffer" type="Timer" parent="MovementSM/NormalAttack"]
+[node name="NormalAttackBuffer" type="Timer" parent="MovementSM/NormalAttack" unique_id=1013637033]
 process_callback = 0
 wait_time = 1.5
 one_shot = true
 
-[node name="NormalAttackA" type="Node" parent="MovementSM/NormalAttack" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackA" type="Node" parent="MovementSM/NormalAttack" unique_id=698895123 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_a"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath(".."), NodePath("../../Ground")]
 
-[node name="NormalAttackB" type="Node" parent="MovementSM/NormalAttack" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackB" type="Node" parent="MovementSM/NormalAttack" unique_id=1651727193 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_b"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath(".."), NodePath("../../Ground")]
 
-[node name="NormalAttackC" type="Node" parent="MovementSM/NormalAttack" node_paths=PackedStringArray("next_states")]
+[node name="NormalAttackC" type="Node" parent="MovementSM/NormalAttack" unique_id=2055598157 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_c"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath(".."), NodePath("../../Ground")]
 
-[node name="HeavyAttack" type="Node" parent="MovementSM" node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
+[node name="HeavyAttack" type="Node" parent="MovementSM" unique_id=1106971201 node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
 script = ExtResource("28_77qcm")
 state_machine = NodePath("..")
 action = NodePath("../../Actions/HeavyAttackAction")
 chain_buffer = NodePath("HeavyAttackBuffer")
 next_states = [NodePath("HeavyAttackA/HeavyAttackAStart"), NodePath("HeavyAttackB/HeavyAttackBStart"), NodePath("HeavyAttackC/HeavyAttackCStart")]
 
-[node name="HeavyAttackBuffer" type="Timer" parent="MovementSM/HeavyAttack"]
+[node name="HeavyAttackBuffer" type="Timer" parent="MovementSM/HeavyAttack" unique_id=503824099]
 process_callback = 0
 wait_time = 1.5
 one_shot = true
 
-[node name="HeavyAttackA" type="Node" parent="MovementSM/HeavyAttack"]
+[node name="HeavyAttackA" type="Node" parent="MovementSM/HeavyAttack" unique_id=1188913974]
 
-[node name="HeavyAttackAStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackAStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" unique_id=1604585350 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_a_start"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackAEnd")]
 
-[node name="HeavyAttackAEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackAEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" unique_id=1880586692 node_paths=PackedStringArray("next_states")]
 script = ExtResource("31_pqg44")
 animation_name = &"heavy_combo_a_end"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
 
-[node name="HeavyAttackB" type="Node" parent="MovementSM/HeavyAttack"]
+[node name="HeavyAttackB" type="Node" parent="MovementSM/HeavyAttack" unique_id=147800314]
 
-[node name="HeavyAttackBStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackBStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" unique_id=1808605964 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_b_start"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackBEnd")]
 
-[node name="HeavyAttackBEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackBEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" unique_id=1460938477 node_paths=PackedStringArray("next_states")]
 script = ExtResource("31_pqg44")
 animation_name = &"heavy_combo_b_end"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
 
-[node name="HeavyAttackC" type="Node" parent="MovementSM/HeavyAttack"]
+[node name="HeavyAttackC" type="Node" parent="MovementSM/HeavyAttack" unique_id=1740292188]
 
-[node name="HeavyAttackCStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackCStart" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" unique_id=148553854 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_c_start"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackCMid")]
 
-[node name="HeavyAttackCMid" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackCMid" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" unique_id=1792449137 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"heavy_combo_c_mid"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackCEnd")]
 
-[node name="HeavyAttackCEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackCEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" unique_id=625749435 node_paths=PackedStringArray("next_states")]
 script = ExtResource("31_pqg44")
 animation_name = &"heavy_combo_c_end"
 move_stats = ExtResource("30_3ymln")
 base_priority = 60.0
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
 
-[node name="CoyoteTimer" type="Timer" parent="."]
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=52646205]
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 one_shot = true
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=230474818]
 offset_top = -15.0
 offset_bottom = -15.0
 scale = Vector2(0.15, 0.15)
 use_top_left = true
 
-[node name="StateLabel" type="Label" parent="CenterContainer" node_paths=PackedStringArray("state_machine")]
+[node name="StateLabel" type="Label" parent="CenterContainer" unique_id=19006695 node_paths=PackedStringArray("state_machine")]
 layout_mode = 2
 text = "GroundMovement"
 label_settings = SubResource("LabelSettings_gbqfn")
