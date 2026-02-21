@@ -10,8 +10,8 @@ var curr: State
 ## Forces [method update] to run another loop.
 var dirty: bool = false
 
-func init(character_body2d: CharacterBody2D, animation_player: AnimationPlayer) -> void:
-	super(character_body2d, animation_player)
+func init(animation_player: AnimationPlayer) -> void:
+	super(animation_player)
 	switch(self.next_states.get(0))
 
 func update(delta: float) -> void:

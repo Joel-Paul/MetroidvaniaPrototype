@@ -15,14 +15,14 @@ var index: int = 0
 func _ready() -> void:
 	chain_buffer.timeout.connect(_timeout)
 
-func init(character_body2d: CharacterBody2D, animation_player: AnimationPlayer) -> void:
+func init(animation_player: AnimationPlayer) -> void:
 	if _init:
 		return
 	for state in self.next_states:
 		if state is AttackState:
 			var attack := state as AttackState
 			attack.chain_buffer = chain_buffer
-	super(character_body2d, animation_player)
+	super(animation_player)
 
 func priority() -> float:
 	if action.is_active():

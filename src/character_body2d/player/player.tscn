@@ -1952,15 +1952,17 @@ base_priority = 0.0
 next_states = [NodePath("Ground")]
 metadata/_custom_type_script = "uid://dit8bpyua32wu"
 
-[node name="Ground" type="Node" parent="MovementSM" unique_id=1984772266 node_paths=PackedStringArray("next_states")]
+[node name="Ground" type="Node" parent="MovementSM" unique_id=1984772266 node_paths=PackedStringArray("character", "next_states")]
 script = ExtResource("19_a31ob")
+character = NodePath("../..")
 move_stats = ExtResource("24_t81xk")
 base_priority = 10.0
 next_states = [NodePath("../Air"), NodePath("../Jump"), NodePath("../NormalAttack"), NodePath("../HeavyAttack")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="Air" type="Node" parent="MovementSM" unique_id=318626775 node_paths=PackedStringArray("next_states")]
+[node name="Air" type="Node" parent="MovementSM" unique_id=318626775 node_paths=PackedStringArray("character", "next_states")]
 script = ExtResource("22_0q6va")
+character = NodePath("../..")
 move_stats = ExtResource("26_bcgkn")
 base_priority = 20.0
 next_states = [NodePath("../Ground"), NodePath("../Jump")]
@@ -2026,8 +2028,9 @@ animation_name = &"heavy_combo_a_start"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackAEnd")]
 
-[node name="HeavyAttackAEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" unique_id=1880586692 node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackAEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackA" unique_id=1880586692 node_paths=PackedStringArray("character", "next_states")]
 script = ExtResource("31_pqg44")
+character = NodePath("../../../..")
 animation_name = &"heavy_combo_a_end"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
@@ -2040,8 +2043,9 @@ animation_name = &"heavy_combo_b_start"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackBEnd")]
 
-[node name="HeavyAttackBEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" unique_id=1460938477 node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackBEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackB" unique_id=1460938477 node_paths=PackedStringArray("character", "next_states")]
 script = ExtResource("31_pqg44")
+character = NodePath("../../../..")
 animation_name = &"heavy_combo_b_end"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../.."), NodePath("../../../Ground")]
@@ -2060,8 +2064,9 @@ animation_name = &"heavy_combo_c_mid"
 move_stats = ExtResource("30_3ymln")
 next_states = [NodePath("../HeavyAttackCEnd")]
 
-[node name="HeavyAttackCEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" unique_id=625749435 node_paths=PackedStringArray("next_states")]
+[node name="HeavyAttackCEnd" type="Node" parent="MovementSM/HeavyAttack/HeavyAttackC" unique_id=625749435 node_paths=PackedStringArray("character", "next_states")]
 script = ExtResource("31_pqg44")
+character = NodePath("../../../..")
 animation_name = &"heavy_combo_c_end"
 move_stats = ExtResource("30_3ymln")
 base_priority = 60.0

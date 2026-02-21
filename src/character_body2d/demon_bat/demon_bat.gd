@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var movement_sm: MovementSM = %MovementSM
 
 func _ready() -> void:
-	movement_sm.init(self, anim_player)
+	movement_sm.init(anim_player)
 
 func _physics_process(delta: float) -> void:
 	velocity = moveable.velocity

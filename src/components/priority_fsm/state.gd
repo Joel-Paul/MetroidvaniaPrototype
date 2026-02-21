@@ -9,20 +9,18 @@ extends Node
 @export var base_priority: float = 50
 @export var next_states: Array[State]
 
-var body2d: CharacterBody2D
 var anim_player: AnimationPlayer
 var active = false
 
 var _init := false
 
-func init(character_body2d: CharacterBody2D, animation_player: AnimationPlayer) -> void:
+func init(animation_player: AnimationPlayer) -> void:
 	if _init:
 		return
 	_init = true
-	body2d = character_body2d
 	anim_player = animation_player
 	for state in self.next_states:
-		state.init(character_body2d, animation_player)
+		state.init(animation_player)
 
 func priority() -> float:
 	return base_priority

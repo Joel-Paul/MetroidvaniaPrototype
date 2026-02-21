@@ -19,5 +19,5 @@ func exit(next: State) -> void:
 	cooldown_timer.start(cooldown)
 
 func in_bite_range() -> bool:
-	player_raycast.target_position = player.global_position - body2d.global_position
+	player_raycast.target_position = player.global_position - player_raycast.global_position
 	return bite_range.has_overlapping_areas() and player_raycast.get_collider() is Hurtbox

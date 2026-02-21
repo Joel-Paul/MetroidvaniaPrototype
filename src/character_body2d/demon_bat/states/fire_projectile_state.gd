@@ -26,14 +26,14 @@ func exit(next: State) -> void:
 	cooldown_timer.start(cooldown)
 
 func in_shoot_range() -> bool:
-	player_raycast.target_position = player.global_position - body2d.global_position
+	player_raycast.target_position = player.global_position - player_raycast.global_position
 	return shoot_enabled.has_overlapping_areas() \
 		and not shoot_disabled.has_overlapping_areas() \
 		and player_raycast.get_collider() is Hurtbox
 
 func charge_projectile() -> void:
 	projectile = DEMON_BAT_PROJECTILE.instantiate()
-	body2d.add_child(projectile)
+	add_child(projectile)
 	projectile.global_position = projectile_marker.global_position
 
 func shoot_projectile() -> void:
@@ -44,4 +44,3 @@ func shoot_projectile() -> void:
 		direction = Vector2.RIGHT
 	var vel = direction * projectile_speed
 	projectile.shoot(vel)
-	projectile.reparent(body2d.get_parent())

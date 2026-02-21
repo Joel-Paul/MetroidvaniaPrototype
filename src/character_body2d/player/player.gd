@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var coyote_timer: Timer = %CoyoteTimer
 
 func _ready() -> void:
-	movement_sm.init(self, anim_player)
+	movement_sm.init(anim_player)
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():

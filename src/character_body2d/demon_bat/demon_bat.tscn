@@ -402,8 +402,9 @@ flippable = NodePath("../Flippable")
 next_states = [NodePath("Chase")]
 metadata/_custom_type_script = "uid://bneifgyo2s1wi"
 
-[node name="Chase" type="Node" parent="MovementSM" unique_id=2116760706 node_paths=PackedStringArray("nav_agent", "next_states")]
+[node name="Chase" type="Node" parent="MovementSM" unique_id=2116760706 node_paths=PackedStringArray("character", "nav_agent", "next_states")]
 script = ExtResource("10_2uvct")
+character = NodePath("../..")
 nav_agent = NodePath("../../NavigationAgent2D")
 nav_update_interval = 0.1
 move_stats = ExtResource("11_ubwcd")

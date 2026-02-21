@@ -1,5 +1,6 @@
 extends MovementState
 
+@export var character: CharacterBody2D
 @export var nav_agent: NavigationAgent2D
 @export_range(0, 5, 0.01, "or_greater", "suffix:s") var nav_update_interval: float = 1
 
@@ -30,4 +31,4 @@ func _update_target() -> void:
 	
 	nav_agent.target_position = player.global_position - Vector2(0, 2)
 	if not nav_agent.is_navigation_finished() and nav_agent.is_target_reachable():
-		moveable.direction = body2d.global_position.direction_to(nav_agent.get_next_path_position())
+		moveable.direction = character.global_position.direction_to(nav_agent.get_next_path_position())
