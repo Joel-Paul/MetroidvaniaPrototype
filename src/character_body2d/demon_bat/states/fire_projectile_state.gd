@@ -6,7 +6,7 @@ const DEMON_BAT_PROJECTILE = preload("uid://cookyrw3rxaw6")
 @export var shoot_disabled: Area2D
 @export var player_raycast: RayCast2D
 @export var projectile_marker: Marker2D
-@export_range(0, 100, 1.0, "or_greater", "suffix:px/s") var projectile_speed: float = 60
+@export_range(0, 500, 1.0, "or_greater", "suffix:px/s") var projectile_speed: float = 60
 @export_range(0, 5, 0.01, "or_greater", "suffix:s") var cooldown: float = 1
 
 var projectile: DemonBatProjectile

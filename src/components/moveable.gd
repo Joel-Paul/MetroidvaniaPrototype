@@ -1,5 +1,9 @@
 class_name Moveable
 extends Node
+## Handles logic related to movement.
+##
+## [method update] requires the current [param velovity] and [param direction] of input must be set.
+## The passed in [MoveStats] parameter determines the maximum velocity and acceleration of movement.
 
 @export var flippable: Flippable
 
@@ -13,6 +17,7 @@ func update(stats: MoveStats, delta: float) -> void:
 	velocity.x = move_toward(velocity.x, stats.speed.x * direction.x, acc.x * delta)
 	velocity.y = move_toward(velocity.y, stats.speed.y * direction.y, acc.y * delta)
 
+#region Methods used in AnimationPlayer
 func add_velocity_facing(vel: Vector2, input_required: bool = false) -> void:
 	if input_required and direction.x != flippable.get_facing():
 		return
@@ -20,3 +25,4 @@ func add_velocity_facing(vel: Vector2, input_required: bool = false) -> void:
 
 func add_speed_in_direction(speed: float) -> void:
 	velocity += speed * direction
+#endregion

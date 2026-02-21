@@ -1,9 +1,13 @@
 class_name StateMachine
 extends State
+## A state machine which manages running and transitioning between [State]s.
+##
+## [StateMachine] itself is a [State] and can therefore be part of a larger state machine.
 
 signal switched_state(old: State, new: State)
 
 var curr: State
+## Forces [method update] to run another loop.
 var dirty: bool = false
 
 func init(character_body2d: CharacterBody2D, animation_player: AnimationPlayer) -> void:

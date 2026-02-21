@@ -1,5 +1,6 @@
 class_name MovementSM
 extends StateMachine
+## State machine specialised in managing [MovementState] states.
 
 @export var moveable: Moveable
 @export var flippable: Flippable

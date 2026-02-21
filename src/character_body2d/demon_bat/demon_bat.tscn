@@ -306,7 +306,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2rgj"]
-radius = 50.0
+radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o16xn"]
 radius = 200.0
@@ -334,7 +334,6 @@ autoplay = &"flying"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=473507788]
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="Moveable" type="Node" parent="." unique_id=1229833907 node_paths=PackedStringArray("flippable")]
 unique_name_in_owner = true

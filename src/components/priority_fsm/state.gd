@@ -1,6 +1,10 @@
 @abstract
 class_name State
 extends Node
+## State to be used by a [StateMachine].
+##
+## All possible transitions are stored in [member next_states].
+## States with a higher [method priority] than this one will be transitioned to.
 
 @export var base_priority: float = 50
 @export var next_states: Array[State]

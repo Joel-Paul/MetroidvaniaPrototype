@@ -1,5 +1,6 @@
 class_name MovementState
 extends State
+## State specialising in movement.
 
 @export var move_stats: MoveStats = MoveStats.new()
 

@@ -3,6 +3,7 @@ extends MovementState
 
 @export var animation_name: StringName
 
+## Used in [ComboState] to reset the sequence.
 var chain_buffer: Timer
 
 func priority() -> float:
