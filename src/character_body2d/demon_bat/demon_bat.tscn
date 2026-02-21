@@ -334,6 +334,7 @@ autoplay = &"flying"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=473507788]
 path_postprocessing = 1
+debug_enabled = true
 
 [node name="Moveable" type="Node" parent="." unique_id=1229833907 node_paths=PackedStringArray("flippable")]
 unique_name_in_owner = true
@@ -426,7 +427,7 @@ shoot_disabled = NodePath("../../Flippable/ShootDisabledRange")
 player_raycast = NodePath("../../PlayerRayCast")
 projectile_marker = NodePath("../../Flippable/ProjectileMarker")
 projectile_speed = 240.0
-shoot_interval = 2.0
+cooldown = 2.0
 animation_name = &"fire_projectile"
 move_stats = ExtResource("13_ubwcd")
 base_priority = 100.0
