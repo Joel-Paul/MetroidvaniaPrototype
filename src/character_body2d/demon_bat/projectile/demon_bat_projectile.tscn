@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cookyrw3rxaw6"]
+[gd_scene format=3 uid="uid://cookyrw3rxaw6"]
 
 [ext_resource type="Script" uid="uid://dpfmm0wp6d2ru" path="res://src/character_body2d/demon_bat/projectile/demon_bat_projectile.gd" id="1_ri5k2"]
 [ext_resource type="Texture2D" uid="uid://c4oycpj1m0otq" path="res://assets/pixramen-valley-asset-pack-v2/demon-bat/spritesheets/1x/demon-bat-prjectile-charging.png" id="1_x6kaj"]
@@ -284,35 +284,33 @@ metadata/_custom_type_script = "uid://ct50xcjdaylqx"
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcjes"]
 radius = 6.0
 
-[node name="DemonBatProjectile" type="Area2D"]
+[node name="DemonBatProjectile" type="Area2D" unique_id=501035173]
 collision_layer = 0
 script = ExtResource("1_ri5k2")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1889391490]
 shape = SubResource("CircleShape2D_ngkf6")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=268008537]
 texture = ExtResource("1_x6kaj")
 hframes = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=881064594]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_kdxje")
-}
-autoplay = "charging"
+libraries/ = SubResource("AnimationLibrary_kdxje")
+autoplay = &"charging"
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("node2d")]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1688078146 node_paths=PackedStringArray("source")]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_xcjes")
-node2d = NodePath("..")
+source = NodePath("..")
 attack = SubResource("Resource_5y281")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=723485589]
 shape = SubResource("CircleShape2D_xcjes")
 disabled = true

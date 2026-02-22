@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://g075p6kl1x00" path="res://src/components/flippable.gd" id="18_0q6va"]
 [ext_resource type="Script" uid="uid://bneifgyo2s1wi" path="res://src/components/priority_fsm/movement_sm.gd" id="18_a31ob"]
 [ext_resource type="Script" uid="uid://dg84s3v4rc2p7" path="res://src/character_body2d/player/states/ground_state.gd" id="19_a31ob"]
+[ext_resource type="Resource" uid="uid://ds6fheh6ul2vu" path="res://src/character_body2d/player/attacks/heavy_attack.tres" id="19_qcjj0"]
 [ext_resource type="Script" uid="uid://cj7tcl04lybrm" path="res://src/components/action.gd" id="20_22ola"]
 [ext_resource type="Script" uid="uid://f5u205qq70y6" path="res://src/character_body2d/player/states/air_state.gd" id="22_0q6va"]
 [ext_resource type="Resource" uid="uid://4ao5u5lp8yek" path="res://src/character_body2d/player/states/move_stats/ground_stats.tres" id="24_t81xk"]
@@ -32,6 +33,7 @@
 [ext_resource type="Script" uid="uid://ba1oruqskxabv" path="res://src/character_body2d/player/states/attack_state.gd" id="28_gbqfn"]
 [ext_resource type="Resource" uid="uid://bq5t6dh5h5iat" path="res://src/character_body2d/player/states/move_stats/attack_stats.tres" id="30_3ymln"]
 [ext_resource type="Script" uid="uid://dwtdhmik2uoh4" path="res://src/character_body2d/player/states/attack_state_end.gd" id="31_pqg44"]
+[ext_resource type="Script" uid="uid://86n06ewwc0e0" path="res://src/components/health_component.gd" id="32_26auh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -1879,18 +1881,20 @@ hframes = 2
 [node name="Hurtbox" type="Area2D" parent="Flippable" unique_id=521998496]
 collision_layer = 2
 collision_mask = 0
+monitoring = false
 script = ExtResource("15_ufn7j")
 metadata/_custom_type_script = "uid://560el77vul8n"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Hurtbox" unique_id=2073024361]
 shape = SubResource("CapsuleShape2D_s3vi5")
 
-[node name="NormalHitbox" type="Area2D" parent="Flippable" unique_id=1588735940 node_paths=PackedStringArray("node2d")]
+[node name="NormalHitbox" type="Area2D" parent="Flippable" unique_id=1588735940 node_paths=PackedStringArray("source")]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
+monitorable = false
 script = ExtResource("16_qebai")
-node2d = NodePath("../..")
+source = NodePath("../..")
 attack = ExtResource("17_6ur7l")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
@@ -1901,13 +1905,14 @@ shape = SubResource("CapsuleShape2D_kvlxm")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="HeavyHitbox" type="Area2D" parent="Flippable" unique_id=1968337866 node_paths=PackedStringArray("node2d")]
+[node name="HeavyHitbox" type="Area2D" parent="Flippable" unique_id=1968337866 node_paths=PackedStringArray("source")]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
+monitorable = false
 script = ExtResource("16_qebai")
-node2d = NodePath("../..")
-attack = ExtResource("17_6ur7l")
+source = NodePath("../..")
+attack = ExtResource("19_qcjj0")
 metadata/_custom_type_script = "uid://dyw5n05xtjylf"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/HeavyHitbox" unique_id=939919436]
@@ -2077,6 +2082,11 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="Health" type="Node" parent="." unique_id=1157654648 node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("32_26auh")
+hurtbox = NodePath("../Flippable/Hurtbox")
+metadata/_custom_type_script = "uid://86n06ewwc0e0"
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=230474818]
 offset_top = -15.0

@@ -10,11 +10,15 @@
 [ext_resource type="Script" uid="uid://cg3uw0dwwxh6s" path="res://src/components/moveable.gd" id="7_i4pe4"]
 [ext_resource type="Script" uid="uid://g075p6kl1x00" path="res://src/components/flippable.gd" id="8_2uvct"]
 [ext_resource type="Script" uid="uid://dbdu17f78vd75" path="res://src/character_body2d/demon_bat/states/chase_state.gd" id="10_2uvct"]
+[ext_resource type="Script" uid="uid://dyw5n05xtjylf" path="res://src/components/hitbox.gd" id="10_i264j"]
+[ext_resource type="Script" uid="uid://ct50xcjdaylqx" path="res://src/components/attack.gd" id="11_1ch2p"]
 [ext_resource type="Resource" uid="uid://vq52agh0afud" path="res://src/character_body2d/demon_bat/states/move_stats/chase_stats.tres" id="11_ubwcd"]
 [ext_resource type="Script" uid="uid://d0ecuctvp3b8" path="res://src/character_body2d/demon_bat/states/bite_state.gd" id="12_ubwcd"]
 [ext_resource type="Resource" uid="uid://debolfpvgcok5" path="res://src/character_body2d/demon_bat/states/move_stats/bite_stats.tres" id="13_ubwcd"]
 [ext_resource type="Script" uid="uid://yxkpowh7gjvn" path="res://src/character_body2d/demon_bat/states/fire_projectile_state.gd" id="14_vladw"]
 [ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="15_n2rgj"]
+[ext_resource type="Script" uid="uid://86n06ewwc0e0" path="res://src/components/health_component.gd" id="16_jk0q6"]
+[ext_resource type="Script" uid="uid://560el77vul8n" path="res://src/components/hurtbox.gd" id="16_o16xn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
 radius = 6.0
@@ -314,6 +318,19 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jk0q6"]
 radius = 70.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o16xn"]
+radius = 5.0
+height = 24.0
+
+[sub_resource type="Resource" id="Resource_58oae"]
+script = ExtResource("11_1ch2p")
+damage = 1
+metadata/_custom_type_script = "uid://ct50xcjdaylqx"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5fyby"]
+radius = 5.0
+height = 24.000002
+
 [sub_resource type="LabelSettings" id="LabelSettings_o16xn"]
 font_size = 32
 
@@ -343,6 +360,7 @@ metadata/_custom_type_script = "uid://cg3uw0dwwxh6s"
 
 [node name="PlayerRayCast" type="RayCast2D" parent="." unique_id=1932913646]
 position = Vector2(0, 8)
+target_position = Vector2(50, 0)
 collision_mask = 3
 collide_with_areas = true
 
@@ -394,6 +412,35 @@ rotation = 1.5707964
 shape = SubResource("CircleShape2D_jk0q6")
 debug_color = Color(1, 1, 1, 0)
 
+[node name="Hurtbox" type="Area2D" parent="Flippable" unique_id=436792666]
+visible = false
+position = Vector2(0, -6)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("16_o16xn")
+metadata/_custom_type_script = "uid://560el77vul8n"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Hurtbox" unique_id=259065142]
+rotation = 1.5707941
+shape = SubResource("CapsuleShape2D_o16xn")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="PassiveHitbox" type="Area2D" parent="Flippable" unique_id=1364830568 node_paths=PackedStringArray("source")]
+position = Vector2(0, -6)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("10_i264j")
+source = NodePath("../..")
+attack = SubResource("Resource_58oae")
+metadata/_custom_type_script = "uid://dyw5n05xtjylf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/PassiveHitbox" unique_id=1209894365]
+rotation = 1.5707941
+shape = SubResource("CapsuleShape2D_5fyby")
+debug_color = Color(0.7, 0, 0, 0)
+
 [node name="MovementSM" type="Node" parent="." unique_id=958912840 node_paths=PackedStringArray("moveable", "flippable", "next_states")]
 unique_name_in_owner = true
 script = ExtResource("7_cr8un")
@@ -433,6 +480,13 @@ move_stats = ExtResource("13_ubwcd")
 base_priority = 100.0
 next_states = [NodePath("../Chase")]
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
+
+[node name="Health" type="Node" parent="." unique_id=1543928667 node_paths=PackedStringArray("hurtbox")]
+unique_name_in_owner = true
+script = ExtResource("16_jk0q6")
+max_health = 10
+hurtbox = NodePath("../Flippable/Hurtbox")
+metadata/_custom_type_script = "uid://86n06ewwc0e0"
 
 [node name="StateDebug" type="CenterContainer" parent="." unique_id=1541480480]
 offset_top = -15.0
