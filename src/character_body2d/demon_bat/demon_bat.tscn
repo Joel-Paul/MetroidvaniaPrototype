@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://d0ecuctvp3b8" path="res://src/character_body2d/demon_bat/states/bite_state.gd" id="12_ubwcd"]
 [ext_resource type="Resource" uid="uid://debolfpvgcok5" path="res://src/character_body2d/demon_bat/states/move_stats/bite_stats.tres" id="13_ubwcd"]
 [ext_resource type="Script" uid="uid://yxkpowh7gjvn" path="res://src/character_body2d/demon_bat/states/fire_projectile_state.gd" id="14_vladw"]
-[ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/character_body2d/player/state_label.gd" id="15_n2rgj"]
+[ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/components/priority_fsm/state_label.gd" id="15_n2rgj"]
 [ext_resource type="Script" uid="uid://86n06ewwc0e0" path="res://src/components/health_component.gd" id="16_jk0q6"]
 [ext_resource type="Script" uid="uid://560el77vul8n" path="res://src/components/hurtbox.gd" id="16_o16xn"]
 
