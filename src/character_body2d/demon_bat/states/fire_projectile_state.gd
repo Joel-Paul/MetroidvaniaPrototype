@@ -33,7 +33,7 @@ func in_shoot_range() -> bool:
 
 func charge_projectile() -> void:
 	projectile = DEMON_BAT_PROJECTILE.instantiate()
-	add_child(projectile)
+	projectile_marker.add_child(projectile)
 	projectile.global_position = projectile_marker.global_position
 
 func shoot_projectile() -> void:
@@ -43,4 +43,5 @@ func shoot_projectile() -> void:
 	if not direction:
 		direction = Vector2.RIGHT
 	var vel = direction * projectile_speed
+	projectile.reparent(self)
 	projectile.shoot(vel)
