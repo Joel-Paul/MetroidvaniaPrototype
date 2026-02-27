@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	movement_sm.init(anim_player)
-	health.connect("health_changed", _die)
+	health.health_changed.connect(_die.unbind(1))
 
 func _physics_process(delta: float) -> void:
 	velocity = moveable.velocity
@@ -16,6 +16,6 @@ func _physics_process(delta: float) -> void:
 	
 	movement_sm.update(delta)
 
-func _die(_delta: int) -> void:
+func _die() -> void:
 	if health.cur_health <= 0:
 		queue_free()
