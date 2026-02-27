@@ -26,6 +26,8 @@ func exit(next: State) -> void:
 	cooldown_timer.start(cooldown)
 
 func in_shoot_range() -> bool:
+	if not player:
+		return false
 	player_raycast.target_position = player.global_position - player_raycast.global_position
 	return shoot_enabled.has_overlapping_areas() \
 		and not shoot_disabled.has_overlapping_areas() \
@@ -37,7 +39,7 @@ func charge_projectile() -> void:
 	projectile.global_position = projectile_marker.global_position
 
 func shoot_projectile() -> void:
-	if not projectile:
+	if not projectile or not player:
 		return
 	var direction = projectile_marker.global_position.direction_to(player.position)
 	if not direction:

@@ -11,6 +11,9 @@ signal health_changed(delta: int)
 func _ready() -> void:
 	hurtbox.attacked.connect(_on_attacked)
 
+func is_dead() -> bool:
+	return cur_health <= 0
+
 func _on_attacked(attack: Attack) -> void:
 	cur_health -= attack.damage
 	health_changed.emit(-attack.damage)

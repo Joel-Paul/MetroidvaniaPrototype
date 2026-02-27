@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bucflposi1ihe" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-run.png" id="2_dovo2"]
 [ext_resource type="Texture2D" uid="uid://b8jvh1dk4awai" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-falling.png" id="4_p47bc"]
 [ext_resource type="Texture2D" uid="uid://50p7487kiahe" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-jump.png" id="5_75vfm"]
+[ext_resource type="Texture2D" uid="uid://cg7p0bjxwp1qu" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-dead-falling.png" id="6_n35y4"]
+[ext_resource type="Texture2D" uid="uid://mx16cpafni0g" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-dead-ground.png" id="6_w0dhr"]
 [ext_resource type="Texture2D" uid="uid://btow5rl36ufrs" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-normal-combo-a.png" id="8_myrg7"]
 [ext_resource type="Texture2D" uid="uid://dvlq4jsttip0q" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-normal-combo-b.png" id="9_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://ca0xcbju6mv6v" path="res://assets/pixramen-valley-asset-pack-v2/dark-knight/spritesheets/1x/dark-knight-normal-combo-c.png" id="10_uf5tr"]
@@ -25,6 +27,7 @@
 [ext_resource type="Script" uid="uid://cj7tcl04lybrm" path="res://src/character_body2d/player/action.gd" id="20_22ola"]
 [ext_resource type="Script" uid="uid://f5u205qq70y6" path="res://src/character_body2d/player/states/air_state.gd" id="22_0q6va"]
 [ext_resource type="Resource" uid="uid://4ao5u5lp8yek" path="res://src/character_body2d/player/states/move_stats/ground_stats.tres" id="24_t81xk"]
+[ext_resource type="Resource" uid="uid://bisrrmq6e31kr" path="res://src/character_body2d/player/states/move_stats/dead_stats.tres" id="25_83yai"]
 [ext_resource type="Resource" uid="uid://i48c0ieunsco" path="res://src/character_body2d/player/states/move_stats/air_stats.tres" id="26_bcgkn"]
 [ext_resource type="Script" uid="uid://7x8s5gn03xo7" path="res://src/character_body2d/player/states/jump_state.gd" id="26_hk1vs"]
 [ext_resource type="Resource" uid="uid://bumitp4los1tx" path="res://src/character_body2d/player/states/move_stats/jump_stats.tres" id="27_t81xk"]
@@ -34,6 +37,8 @@
 [ext_resource type="Resource" uid="uid://bq5t6dh5h5iat" path="res://src/character_body2d/player/states/move_stats/attack_stats.tres" id="30_3ymln"]
 [ext_resource type="Script" uid="uid://dwtdhmik2uoh4" path="res://src/character_body2d/player/states/attack_state_end.gd" id="31_pqg44"]
 [ext_resource type="Script" uid="uid://86n06ewwc0e0" path="res://src/components/health_component.gd" id="32_26auh"]
+[ext_resource type="Script" uid="uid://1k33r2b80knt" path="res://src/character_body2d/player/states/dead_ground_state.gd" id="34_83yai"]
+[ext_resource type="Script" uid="uid://b881dm0t1shoh" path="res://src/character_body2d/player/states/dead_falling_state.gd" id="37_yywur"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -530,6 +535,111 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_yywur"]
+resource_name = "die_falling"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_n35y4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flippable/Sprite2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_83yai"]
+resource_name = "die_ground"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_w0dhr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flippable/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flippable/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flippable/Sprite2D:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -22)]
 }
 
 [sub_resource type="Animation" id="Animation_iqsei"]
@@ -1832,6 +1942,8 @@ _data = {
 &"air_combo_a": SubResource("Animation_j4nxn"),
 &"air_combo_b": SubResource("Animation_28m0y"),
 &"air_combo_c": SubResource("Animation_uniwh"),
+&"die_falling": SubResource("Animation_yywur"),
+&"die_ground": SubResource("Animation_83yai"),
 &"fall": SubResource("Animation_iqsei"),
 &"heavy_combo_a_end": SubResource("Animation_y4nid"),
 &"heavy_combo_a_start": SubResource("Animation_2a0w1"),
@@ -1954,7 +2066,7 @@ script = ExtResource("18_a31ob")
 moveable = NodePath("../Moveable")
 flippable = NodePath("../Flippable")
 base_priority = 0.0
-next_states = [NodePath("Ground")]
+next_states = [NodePath("Ground"), NodePath("DieGround"), NodePath("DieFalling")]
 metadata/_custom_type_script = "uid://dit8bpyua32wu"
 
 [node name="Ground" type="Node" parent="MovementSM" unique_id=1984772266 node_paths=PackedStringArray("character", "next_states")]
@@ -1970,7 +2082,7 @@ script = ExtResource("22_0q6va")
 character = NodePath("../..")
 move_stats = ExtResource("26_bcgkn")
 base_priority = 20.0
-next_states = [NodePath("../Ground"), NodePath("../Jump")]
+next_states = [NodePath("../Jump")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="Jump" type="Node" parent="MovementSM" unique_id=442713493 node_paths=PackedStringArray("jump_action", "coyote_timer", "next_states")]
@@ -1980,7 +2092,7 @@ jump_action = NodePath("../../Actions/JumpAction")
 coyote_timer = NodePath("../../CoyoteTimer")
 move_stats = ExtResource("27_t81xk")
 base_priority = 30.0
-next_states = [NodePath("../Air"), NodePath("../Ground")]
+next_states = [NodePath("../Air")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="NormalAttack" type="Node" parent="MovementSM" unique_id=387088156 node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
@@ -1999,19 +2111,19 @@ one_shot = true
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_a"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../Ground")]
+next_states = [NodePath("..")]
 
 [node name="NormalAttackB" type="Node" parent="MovementSM/NormalAttack" unique_id=1651727193 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_b"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../Ground")]
+next_states = [NodePath("..")]
 
 [node name="NormalAttackC" type="Node" parent="MovementSM/NormalAttack" unique_id=2055598157 node_paths=PackedStringArray("next_states")]
 script = ExtResource("28_gbqfn")
 animation_name = &"normal_combo_c"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath(".."), NodePath("../../Ground")]
+next_states = [NodePath("..")]
 
 [node name="HeavyAttack" type="Node" parent="MovementSM" unique_id=1106971201 node_paths=PackedStringArray("state_machine", "action", "chain_buffer", "next_states")]
 script = ExtResource("28_77qcm")
@@ -2038,7 +2150,7 @@ script = ExtResource("31_pqg44")
 character = NodePath("../../../..")
 animation_name = &"heavy_combo_a_end"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath("../.."), NodePath("../../../Ground")]
+next_states = [NodePath("../..")]
 
 [node name="HeavyAttackB" type="Node" parent="MovementSM/HeavyAttack" unique_id=147800314]
 
@@ -2053,7 +2165,7 @@ script = ExtResource("31_pqg44")
 character = NodePath("../../../..")
 animation_name = &"heavy_combo_b_end"
 move_stats = ExtResource("30_3ymln")
-next_states = [NodePath("../.."), NodePath("../../../Ground")]
+next_states = [NodePath("../..")]
 
 [node name="HeavyAttackC" type="Node" parent="MovementSM/HeavyAttack" unique_id=1740292188]
 
@@ -2075,7 +2187,22 @@ character = NodePath("../../../..")
 animation_name = &"heavy_combo_c_end"
 move_stats = ExtResource("30_3ymln")
 base_priority = 60.0
-next_states = [NodePath("../.."), NodePath("../../../Ground")]
+next_states = [NodePath("../..")]
+
+[node name="DieGround" type="Node" parent="MovementSM" unique_id=1146668670 node_paths=PackedStringArray("health")]
+script = ExtResource("34_83yai")
+health = NodePath("../../Health")
+move_stats = ExtResource("25_83yai")
+base_priority = 100.0
+metadata/_custom_type_script = "uid://g5ibefhptm11"
+
+[node name="DieFalling" type="Node" parent="MovementSM" unique_id=1255783217 node_paths=PackedStringArray("character", "health")]
+script = ExtResource("37_yywur")
+character = NodePath("../..")
+health = NodePath("../../Health")
+move_stats = ExtResource("25_83yai")
+base_priority = 110.0
+metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=52646205]
 unique_name_in_owner = true
@@ -2084,6 +2211,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Health" type="Node" parent="." unique_id=1157654648 node_paths=PackedStringArray("hurtbox")]
+unique_name_in_owner = true
 script = ExtResource("32_26auh")
 hurtbox = NodePath("../Flippable/Hurtbox")
 metadata/_custom_type_script = "uid://86n06ewwc0e0"

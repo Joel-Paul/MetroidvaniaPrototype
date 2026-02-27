@@ -20,12 +20,19 @@ func update(delta: float) -> void:
 		if not curr:
 			return
 		curr.update(delta)
-		var next := curr.get_next()
-		switch(next)
+		switch(get_next())
 		
 		if not dirty:
 			break
 		dirty = false
+
+func get_next() -> State:
+	var global_next := super()
+	var local_next := curr.get_next()
+	
+	if global_next == self:
+		return local_next
+	return local_next if local_next.priority() >= global_next.priority() else global_next
 
 func switch(next: State) -> void:
 	if not next or curr == next:

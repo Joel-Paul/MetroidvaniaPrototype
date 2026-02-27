@@ -17,5 +17,5 @@ func _physics_process(delta: float) -> void:
 	movement_sm.update(delta)
 
 func _die() -> void:
-	if health.cur_health <= 0:
+	if health.is_dead():
 		queue_free()

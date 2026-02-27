@@ -279,6 +279,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_5y281"]
 script = ExtResource("6_ngkf6")
+damage = 1
 metadata/_custom_type_script = "uid://ct50xcjdaylqx"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcjes"]

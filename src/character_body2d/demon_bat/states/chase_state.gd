@@ -30,5 +30,5 @@ func _update_target() -> void:
 	if not player: return
 	
 	nav_agent.target_position = player.global_position - Vector2(0, 2)
-	if not nav_agent.is_navigation_finished() and nav_agent.is_target_reachable():
+	if moveable and not nav_agent.is_navigation_finished() and nav_agent.is_target_reachable():
 		moveable.direction = character.global_position.direction_to(nav_agent.get_next_path_position())
