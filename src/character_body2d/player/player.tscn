@@ -538,7 +538,7 @@ tracks/9/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_yywur"]
-resource_name = "die_falling"
+resource_name = "death_falling"
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -591,7 +591,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_83yai"]
-resource_name = "die_ground"
+resource_name = "death_ground"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1942,8 +1942,8 @@ _data = {
 &"air_combo_a": SubResource("Animation_j4nxn"),
 &"air_combo_b": SubResource("Animation_28m0y"),
 &"air_combo_c": SubResource("Animation_uniwh"),
-&"die_falling": SubResource("Animation_yywur"),
-&"die_ground": SubResource("Animation_83yai"),
+&"death_falling": SubResource("Animation_yywur"),
+&"death_ground": SubResource("Animation_83yai"),
 &"fall": SubResource("Animation_iqsei"),
 &"heavy_combo_a_end": SubResource("Animation_y4nid"),
 &"heavy_combo_a_start": SubResource("Animation_2a0w1"),
