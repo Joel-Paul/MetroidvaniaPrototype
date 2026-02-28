@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://7h2orxjm11en" path="res://src/components/priority_fsm/state_label.gd" id="15_n2rgj"]
 [ext_resource type="Script" uid="uid://86n06ewwc0e0" path="res://src/components/health_component.gd" id="16_jk0q6"]
 [ext_resource type="Script" uid="uid://560el77vul8n" path="res://src/components/hurtbox.gd" id="16_o16xn"]
+[ext_resource type="Script" uid="uid://ce44k3kgahc1x" path="res://src/character_body2d/demon_bat/states/death_state.gd" id="18_58oae"]
+[ext_resource type="Resource" uid="uid://c51g2h4csdvqj" path="res://src/character_body2d/demon_bat/states/move_stats/death_stats.tres" id="19_5fyby"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pbn3"]
 radius = 6.0
@@ -446,7 +448,8 @@ unique_name_in_owner = true
 script = ExtResource("7_cr8un")
 moveable = NodePath("../Moveable")
 flippable = NodePath("../Flippable")
-next_states = [NodePath("Chase")]
+base_priority = 0.0
+next_states = [NodePath("Chase"), NodePath("Death")]
 metadata/_custom_type_script = "uid://bneifgyo2s1wi"
 
 [node name="Chase" type="Node" parent="MovementSM" unique_id=2116760706 node_paths=PackedStringArray("character", "nav_agent", "next_states")]
@@ -458,16 +461,15 @@ move_stats = ExtResource("11_ubwcd")
 next_states = [NodePath("../Bite"), NodePath("../FireProjectile")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="Bite" type="Node" parent="MovementSM" unique_id=2109303204 node_paths=PackedStringArray("bite_range", "player_raycast", "next_states")]
+[node name="Bite" type="Node" parent="MovementSM" unique_id=2109303204 node_paths=PackedStringArray("bite_range", "player_raycast")]
 script = ExtResource("12_ubwcd")
 bite_range = NodePath("../../Flippable/BiteRange")
 player_raycast = NodePath("../../PlayerRayCast")
 animation_name = &"bite"
 move_stats = ExtResource("13_ubwcd")
-next_states = [NodePath("../Chase")]
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
 
-[node name="FireProjectile" type="Node" parent="MovementSM" unique_id=1728869548 node_paths=PackedStringArray("shoot_enabled", "shoot_disabled", "player_raycast", "projectile_marker", "next_states")]
+[node name="FireProjectile" type="Node" parent="MovementSM" unique_id=1728869548 node_paths=PackedStringArray("shoot_enabled", "shoot_disabled", "player_raycast", "projectile_marker")]
 script = ExtResource("14_vladw")
 shoot_enabled = NodePath("../../Flippable/ShootEnabledRange")
 shoot_disabled = NodePath("../../Flippable/ShootDisabledRange")
@@ -477,14 +479,19 @@ projectile_speed = 240.0
 cooldown = 2.0
 animation_name = &"fire_projectile"
 move_stats = ExtResource("13_ubwcd")
-base_priority = 100.0
-next_states = [NodePath("../Chase")]
+base_priority = 90.0
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
+
+[node name="Death" type="Node" parent="MovementSM" unique_id=449465179 node_paths=PackedStringArray("health")]
+script = ExtResource("18_58oae")
+health = NodePath("../../Health")
+move_stats = ExtResource("19_5fyby")
+base_priority = 100.0
+metadata/_custom_type_script = "uid://g5ibefhptm11"
 
 [node name="Health" type="Node" parent="." unique_id=1543928667 node_paths=PackedStringArray("hurtbox")]
 unique_name_in_owner = true
 script = ExtResource("16_jk0q6")
-max_health = 10
 hurtbox = NodePath("../Flippable/Hurtbox")
 metadata/_custom_type_script = "uid://86n06ewwc0e0"
 

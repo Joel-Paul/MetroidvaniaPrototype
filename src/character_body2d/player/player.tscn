@@ -2213,6 +2213,7 @@ one_shot = true
 [node name="Health" type="Node" parent="." unique_id=1157654648 node_paths=PackedStringArray("hurtbox")]
 unique_name_in_owner = true
 script = ExtResource("32_26auh")
+max_health = 10
 hurtbox = NodePath("../Flippable/Hurtbox")
 metadata/_custom_type_script = "uid://86n06ewwc0e0"
 

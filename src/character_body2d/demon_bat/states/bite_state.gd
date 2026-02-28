@@ -11,7 +11,7 @@ func priority() -> float:
 	if active and anim_player.is_playing():
 		return base_priority
 	if not active and in_bite_range() and cooldown_timer.is_stopped():
-		return base_priority * 1.1
+		return base_priority
 	return 0
 
 func exit(next: State) -> void:

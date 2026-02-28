@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func priority() -> float:
 	if nav_agent.is_target_reached():
-		return base_priority * 0.9
+		return base_priority
 	if nav_agent.is_target_reachable():
 		return base_priority
 	return 0
