@@ -27,7 +27,7 @@
 [ext_resource type="Script" uid="uid://cj7tcl04lybrm" path="res://src/character_body2d/player/action.gd" id="20_22ola"]
 [ext_resource type="Script" uid="uid://f5u205qq70y6" path="res://src/character_body2d/player/states/air_state.gd" id="22_0q6va"]
 [ext_resource type="Resource" uid="uid://4ao5u5lp8yek" path="res://src/character_body2d/player/states/move_stats/ground_stats.tres" id="24_t81xk"]
-[ext_resource type="Resource" uid="uid://bisrrmq6e31kr" path="res://src/character_body2d/player/states/move_stats/dead_stats.tres" id="25_83yai"]
+[ext_resource type="Resource" uid="uid://bisrrmq6e31kr" path="res://src/character_body2d/player/states/move_stats/death_stats.tres" id="25_83yai"]
 [ext_resource type="Resource" uid="uid://i48c0ieunsco" path="res://src/character_body2d/player/states/move_stats/air_stats.tres" id="26_bcgkn"]
 [ext_resource type="Script" uid="uid://7x8s5gn03xo7" path="res://src/character_body2d/player/states/jump_state.gd" id="26_hk1vs"]
 [ext_resource type="Resource" uid="uid://bumitp4los1tx" path="res://src/character_body2d/player/states/move_stats/jump_stats.tres" id="27_t81xk"]
@@ -37,8 +37,8 @@
 [ext_resource type="Resource" uid="uid://bq5t6dh5h5iat" path="res://src/character_body2d/player/states/move_stats/attack_stats.tres" id="30_3ymln"]
 [ext_resource type="Script" uid="uid://dwtdhmik2uoh4" path="res://src/character_body2d/player/states/attack_state_end.gd" id="31_pqg44"]
 [ext_resource type="Script" uid="uid://86n06ewwc0e0" path="res://src/components/health_component.gd" id="32_26auh"]
-[ext_resource type="Script" uid="uid://1k33r2b80knt" path="res://src/character_body2d/player/states/dead_ground_state.gd" id="34_83yai"]
-[ext_resource type="Script" uid="uid://b881dm0t1shoh" path="res://src/character_body2d/player/states/dead_falling_state.gd" id="37_yywur"]
+[ext_resource type="Script" uid="uid://1k33r2b80knt" path="res://src/character_body2d/player/states/death_ground_state.gd" id="34_83yai"]
+[ext_resource type="Script" uid="uid://b881dm0t1shoh" path="res://src/character_body2d/player/states/death_falling_state.gd" id="37_yywur"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 3.0
@@ -2066,7 +2066,7 @@ script = ExtResource("18_a31ob")
 moveable = NodePath("../Moveable")
 flippable = NodePath("../Flippable")
 base_priority = 0.0
-next_states = [NodePath("Ground"), NodePath("DieGround"), NodePath("DieFalling")]
+next_states = [NodePath("Ground"), NodePath("DeathGround"), NodePath("DeathFalling")]
 metadata/_custom_type_script = "uid://dit8bpyua32wu"
 
 [node name="Ground" type="Node" parent="MovementSM" unique_id=1984772266 node_paths=PackedStringArray("character", "next_states")]
@@ -2189,14 +2189,14 @@ move_stats = ExtResource("30_3ymln")
 base_priority = 60.0
 next_states = [NodePath("../..")]
 
-[node name="DieGround" type="Node" parent="MovementSM" unique_id=1146668670 node_paths=PackedStringArray("health")]
+[node name="DeathGround" type="Node" parent="MovementSM" unique_id=1146668670 node_paths=PackedStringArray("health")]
 script = ExtResource("34_83yai")
 health = NodePath("../../Health")
 move_stats = ExtResource("25_83yai")
 base_priority = 100.0
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
-[node name="DieFalling" type="Node" parent="MovementSM" unique_id=1255783217 node_paths=PackedStringArray("character", "health")]
+[node name="DeathFalling" type="Node" parent="MovementSM" unique_id=1255783217 node_paths=PackedStringArray("character", "health")]
 script = ExtResource("37_yywur")
 character = NodePath("../..")
 health = NodePath("../../Health")
