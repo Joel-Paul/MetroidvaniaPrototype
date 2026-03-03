@@ -13,10 +13,10 @@ func _ready() -> void:
 
 func priority() -> float:
 	if nav_agent.is_target_reached():
-		return base_priority
+		return 1.0
 	if nav_agent.is_target_reachable():
 		return base_priority
-	return 0
+	return 0.0
 
 func enter(_prev: State) -> void:
 	nav_timer.start(nav_update_interval)

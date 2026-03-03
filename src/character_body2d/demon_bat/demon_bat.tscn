@@ -458,6 +458,7 @@ character = NodePath("../..")
 nav_agent = NodePath("../../NavigationAgent2D")
 nav_update_interval = 0.1
 move_stats = ExtResource("11_ubwcd")
+base_priority = 10.0
 next_states = [NodePath("../Bite"), NodePath("../FireProjectile")]
 metadata/_custom_type_script = "uid://g5ibefhptm11"
 
@@ -467,6 +468,7 @@ bite_range = NodePath("../../Flippable/BiteRange")
 player_raycast = NodePath("../../PlayerRayCast")
 animation_name = &"bite"
 move_stats = ExtResource("13_ubwcd")
+base_priority = 20.0
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
 
 [node name="FireProjectile" type="Node" parent="MovementSM" unique_id=1728869548 node_paths=PackedStringArray("shoot_enabled", "shoot_disabled", "player_raycast", "projectile_marker")]
@@ -479,7 +481,7 @@ projectile_speed = 240.0
 cooldown = 2.0
 animation_name = &"fire_projectile"
 move_stats = ExtResource("13_ubwcd")
-base_priority = 90.0
+base_priority = 20.0
 metadata/_custom_type_script = "uid://ba1oruqskxabv"
 
 [node name="Death" type="Node" parent="MovementSM" unique_id=449465179 node_paths=PackedStringArray("health")]

@@ -8,10 +8,10 @@ var chain_buffer: Timer
 
 func priority() -> float:
 	if active and anim_player.is_playing():
-		return base_priority
+		return 90.0
 	if not active:
 		return base_priority
-	return 0
+	return 5.0
 
 func enter(_prev: State) -> void:
 	anim_player.play(animation_name)

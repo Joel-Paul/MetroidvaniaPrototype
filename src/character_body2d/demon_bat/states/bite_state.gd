@@ -9,10 +9,10 @@ extends AttackState
 
 func priority() -> float:
 	if active and anim_player.is_playing():
-		return base_priority
+		return 90.0
 	if not active and in_bite_range() and cooldown_timer.is_stopped():
 		return base_priority
-	return 0
+	return 0.0
 
 func exit(next: State) -> void:
 	super(next)
