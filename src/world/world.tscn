@@ -5,11 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://bwfyxwd4ucwa6" path="res://src/character_body2d/player/player.tscn" id="2_sl2e5"]
 [ext_resource type="PackedScene" uid="uid://181spnr3m2rf" path="res://src/character_body2d/demon_bat/demon_bat.tscn" id="4_6m72w"]
 [ext_resource type="Script" uid="uid://cf0se1ejiqghq" path="res://src/world/astar_grid_navigation.gd" id="5_43c6p"]
+[ext_resource type="PackedScene" uid="uid://f68cenwm5bq4" path="res://src/ui/hud.tscn" id="6_l0av5"]
 
 [node name="World" type="Node2D" unique_id=1088794829]
 script = ExtResource("1_1fp7r")
 
 [node name="Player" parent="." unique_id=993497619 instance=ExtResource("2_sl2e5")]
+unique_name_in_owner = true
 position = Vector2(385, 242)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1893054702]
@@ -32,3 +34,6 @@ tile_map_data = PackedByteArray("AAAOAAAAAAAGAAYAAAANAAAAAAAIAAYAAAAMAAAAAAAGAAY
 tile_set = ExtResource("1_dphjl")
 script = ExtResource("5_43c6p")
 nav_tile_atlas_coords = Vector2i(27, 18)
+
+[node name="HUD" parent="." unique_id=853832119 instance=ExtResource("6_l0av5")]
+unique_name_in_owner = true

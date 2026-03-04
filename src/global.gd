@@ -1,6 +1,6 @@
 extends Node
 
-func get_player() -> CharacterBody2D:
+func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
 
 func create_timer(parent: Node = self, one_shot: bool = true) -> Timer:

@@ -1,28 +1,24 @@
 [gd_scene format=3 uid="uid://f68cenwm5bq4"]
 
+[ext_resource type="Script" uid="uid://cbyc134lcvbs4" path="res://src/ui/hud.gd" id="1_0isw4"]
 [ext_resource type="Texture2D" uid="uid://de8r571cnjrgl" path="res://assets/pixramen-valley-asset-pack-v2/hp_energy_bar/spritesheets/1x/two-bar-container.png" id="1_r2cn7"]
 [ext_resource type="Texture2D" uid="uid://d36miu5c8mqsg" path="res://assets/pixramen-valley-asset-pack-v2/hp_energy_bar/spritesheets/1x/hp-icon.png" id="2_0isw4"]
 [ext_resource type="Texture2D" uid="uid://b8tnq4bu0rv2b" path="res://assets/pixramen-valley-asset-pack-v2/hp_energy_bar/spritesheets/1x/hp-bar.png" id="3_vbpn1"]
 [ext_resource type="Texture2D" uid="uid://bdmejioth57v8" path="res://assets/pixramen-valley-asset-pack-v2/hp_energy_bar/spritesheets/1x/energy-icon.png" id="4_yy3iv"]
 [ext_resource type="Texture2D" uid="uid://c3ysdkdqwkj5q" path="res://assets/pixramen-valley-asset-pack-v2/hp_energy_bar/spritesheets/1x/energy-bar.png" id="5_751uk"]
 
-[node name="HUD" type="Control" unique_id=853832119]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HUD" type="CanvasLayer" unique_id=1496606171]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+script = ExtResource("1_0isw4")
 
 [node name="BarBackground" type="TextureRect" parent="." unique_id=705256805]
-layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_r2cn7")
 stretch_mode = 2
 
 [node name="Health" type="HBoxContainer" parent="." unique_id=1131542081]
-layout_mode = 0
 offset_left = 3.0
 offset_top = 5.0
 offset_right = 43.0
@@ -35,6 +31,7 @@ texture = ExtResource("2_0isw4")
 stretch_mode = 2
 
 [node name="HealthBar" type="HBoxContainer" parent="Health" unique_id=1619075676]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -71,7 +68,6 @@ texture = ExtResource("3_vbpn1")
 stretch_mode = 2
 
 [node name="Energy" type="HBoxContainer" parent="." unique_id=1444418768]
-layout_mode = 0
 offset_left = 7.0
 offset_top = 21.0
 offset_right = 61.0

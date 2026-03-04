@@ -1,7 +1,9 @@
+class_name Player
 extends CharacterBody2D
 
-@onready var anim_player := %AnimationPlayer
+signal health_changed(delta: int)
 
+@onready var anim_player := %AnimationPlayer
 @onready var moveable: Moveable = %Moveable
 @onready var movement_sm: MovementSM = %MovementSM
 @onready var coyote_timer: Timer = %CoyoteTimer
@@ -9,6 +11,7 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	movement_sm.init(anim_player)
+	health.health_changed.connect(_health_changed)
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
@@ -23,3 +26,6 @@ func _physics_process(delta: float) -> void:
 	var input := 0.0 if health.is_dead() else Input.get_axis("left", "right")
 	moveable.direction = input * Vector2.RIGHT + Vector2.DOWN
 	movement_sm.update(delta)
+
+func _health_changed(delta: int) -> void:
+	health_changed.emit(delta)
