@@ -2186,7 +2186,7 @@ script = ExtResource("31_pqg44")
 character = NodePath("../../../..")
 animation_name = &"heavy_combo_c_end"
 move_stats = ExtResource("30_3ymln")
-base_priority = 60.0
+base_priority = 85.0
 next_states = [NodePath("../..")]
 
 [node name="DeathGround" type="Node" parent="MovementSM" unique_id=1146668670 node_paths=PackedStringArray("health")]
